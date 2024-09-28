@@ -1,0 +1,69 @@
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  height: auto;
+  padding: 40px 0;
+  margin-top: 50px; // Add some vertical padding
+  // background: linear-gradient(to bottom right, #e0f7fa, #ffe082); // Soft gradient background
+}
+
+.auth-card {
+  background: white;
+  border-radius: 16px;
+  padding: 40px 30px; // Increased padding for better spacing
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3); // Enhanced shadow for depth
+  text-align: center;
+  width: 400px; // Set a fixed width for the card
+  max-width: 90%; // Responsive max width
+  position: relative; // For back button positioning
+}
+
+
+.brand-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 28px; // Increased font size for emphasis
+  color: #333; // Deep color for contrast
+  margin: 0 0 10px 0; // Margin adjustment
+}
+
+.brand-slogan {
+  font-family: 'Roboto Slab', serif;
+  font-size: 16px; // Adjust as necessary
+  color: #a88f3b; // Black-golden color
+  font-style: italic;
+  margin: 0 0 25px 0; // Margin adjustment
+}
+
+.input-box {
+  width: 90%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 2px solid #ff4757; // Vibrant border color
+  border-radius: 8px; // Increased border radius
+  transition: border 0.3s ease, box-shadow 0.3s ease; // Added box-shadow transition
+  font-size: 16px;
+
+  &:focus {
+    border-color: #ffa726; // Change border color on focus
+    outline: none; // Remove default outline
+    box-shadow: 0 0 5px rgba(255, 167, 38, 0.5); // Add focus shadow effect
+  }
+}
+
+.send-button {
+  background-color: #ff5722; // Bright orange button color
+  color: white;
+  border: none;
+  border-radius: 8px; // Increased border radius
+  padding: 12px 20px; // Adjusted padding for a better look
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.2s ease; // Added transform transition
+
+  &:hover {
+    background-color: #e64a19; // Darker shade on hover
+    transform: translateY(-2px); // Slight lift effect on hover
+  }
+}

@@ -1,0 +1,18 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <button class="back-button" (click)="goBack()">←</button>
+    <h1 class="brand-title">Bharat Bijili</h1>
+    <!-- <p class="customer-id">Customer ID: {{ customerId }}</p> -->
+    <div class="otp-inputs">
+      <input *ngFor="let box of otpBoxes; let i = index"
+             type="text"
+             maxlength="1"
+             class="otp-box"
+             [(ngModel)]="otp[i]"
+             (input)="moveFocus(i)"
+      />
+    </div>
+    <button (click)="verifyOtp()" class="verify-button">Verify & Login</button>
+    <div class="timer">{{ timeLeft }}s left</div>
+  </div>
+</div>

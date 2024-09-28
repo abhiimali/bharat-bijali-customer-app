@@ -1,0 +1,48 @@
+<!-- payment-option.component.html -->
+<div class="payment-options">
+    <h2>Select Payment Method</h2>
+    <div class="payment-methods">
+      <label>
+        <input type="radio" name="paymentMethod" value="UPI" [(ngModel)]="selectedMethod"> UPI
+      </label>
+      <label>
+        <input type="radio" name="paymentMethod" value="CARD" [(ngModel)]="selectedMethod"> Card
+      </label>
+      <label>
+        <input type="radio" name="paymentMethod" value="NET_BANKING" [(ngModel)]="selectedMethod"> Net Banking
+      </label>
+      <label>
+        <input type="radio" name="paymentMethod" value="CASH" [(ngModel)]="selectedMethod"> Cash
+      </label>
+    </div>
+  
+    <div class="payment-form" *ngIf="selectedMethod === 'UPI'">
+      <h3>UPI Payment</h3>
+      <input [(ngModel)]="upiId" placeholder="Enter UPI ID" required>
+      <input type="password" [(ngModel)]="mpin" placeholder="Enter MPIN" required>
+      <button (click)="confirmPayment()">Pay Now</button>
+    </div>
+  
+    <div class="payment-form" *ngIf="selectedMethod === 'CARD'">
+      <h3>Card Payment</h3>
+      <input [(ngModel)]="cardNumber" placeholder="Card Number" required>
+      <input [(ngModel)]="cardHolderName" placeholder="Card Holder Name" required>
+      <input type="password" [(ngModel)]="cvv" placeholder="CVV" required>
+      <input [(ngModel)]="expiryDate" placeholder="MM/YY" required>
+      <button (click)="confirmPayment()">Pay Now</button>
+    </div>
+  
+    <div class="payment-form" *ngIf="selectedMethod === 'NET_BANKING'">
+      <h3>Net Banking</h3>
+      <input [(ngModel)]="netBankingUserName" placeholder="Username" required>
+      <input type="password" [(ngModel)]="password" placeholder="Password" required>
+      <button (click)="confirmPayment()">Pay Now</button>
+    </div>
+  
+    <div class="payment-form" *ngIf="selectedMethod === 'CASH'">
+      <h3>Cash Payment</h3>
+      <p>Click below to settle bill in cash.</p>
+      <button (click)="requestCashPayment()">Request Cash Payment</button>
+    </div>
+  </div>
+  

@@ -1,0 +1,91 @@
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+  width: auto;
+  height: auto;
+  padding: 40px 0; // Add some vertical padding
+  // background: linear-gradient(to bottom right, #e0f7fa, #ffe082); // Soft gradient background
+}
+
+.auth-card {
+  background: white;
+  border-radius: 16px;
+  padding: 40px 30px; // Increased padding for better spacing
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3); // Enhanced shadow for depth
+  text-align: center;
+  width: 400px; // Set a fixed width for the card
+  max-width: 90%; // Responsive max width
+  position: relative; // For back button positioning
+}
+
+
+.brand-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 28px; // Increased font size for emphasis
+  color: #333; // Deep color for contrast
+  margin: 0 0 10px 0; // Margin adjustment
+}
+
+.customer-id {
+  margin: 15px 0; // Increased margin for better spacing
+  font-size: 16px; // Adjusted font size for clarity
+  color: #34495e; // Darker color for better readability
+}
+
+.otp-inputs {
+  display: flex;
+  justify-content: space-between;
+  margin: 30px 0; // Increased margin for spacing
+}
+
+.otp-box {
+  width: 45px; // Increased width for ease of use
+  height: 45px; // Increased height for a better look
+  text-align: center;
+  font-size: 24px; // Increased font size for visibility
+  border: 2px solid #ff4757; // Vibrant border color
+  border-radius: 8px; // Increased border radius for a softer look
+  transition: border 0.3s ease, box-shadow 0.3s ease; // Added transitions for interaction
+
+  &:focus {
+    border-color: #ffa726; // Change border color on focus
+    outline: none; // Remove default outline
+    box-shadow: 0 0 5px rgba(255, 167, 38, 0.5); // Add focus shadow effect
+  }
+}
+
+.back-button {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #ff5722; // Changed color to match the theme
+  font-weight: bold;
+}
+
+.verify-button {
+  background-color: #ff5722; // Bright orange button color
+  color: white;
+  border: none;
+  border-radius: 8px; // Increased border radius for a softer look
+  padding: 12px 20px; // Adjusted padding for better appearance
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.2s ease; // Added transform transition
+
+  &:hover {
+    background-color: #e64a19; // Darker shade on hover
+    transform: translateY(-2px); // Slight lift effect on hover
+  }
+}
+
+.timer {
+  margin-top: 15px; // Increased margin for better spacing
+  font-size: 16px; // Increased font size for visibility
+  color: #e74c3c; // Alert color for timer
+}

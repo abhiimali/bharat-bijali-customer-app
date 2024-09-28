@@ -1,0 +1,104 @@
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  height: 100vh;
+  background-color: #e8eaf6;
+}
+
+/* Sidebar Style */
+.sidebar {
+  width: 60px;
+  background-color: white;
+  height: 100%;
+  position: relative;
+  transition: width 0.3s ease;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  height: 100vh;
+}
+
+.sidebar:hover {
+  width: 220px;
+}
+
+.sidebar .logo {
+  text-align: center;
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.sidebar .logo i {
+  font-size: 24px;
+  color: #2d39c3;
+}
+
+.sidebar .brand-text {
+  display: none;
+  margin-left: 10px;
+  font-size: 18px;
+  color: #2d39c3;
+}
+
+.sidebar:hover .brand-text {
+  display: inline;
+}
+
+.sidebar .nav-list {
+  padding: 15px 0;
+}
+
+.sidebar .nav-list li {
+  list-style: none;
+  padding: 15px;
+  text-align: center;
+}
+
+.sidebar .nav-list li a {
+  text-decoration: none;
+  color: #666;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.sidebar:hover .nav-list li a {
+  justify-content: flex-start;
+  padding-left: 20px;
+}
+
+.sidebar .nav-list li a:hover {
+  background-color: #f5f5f5;
+  color: #2d39c3;
+}
+
+.sidebar .nav-list li a i {
+  font-size: 18px;
+  margin-right: 0;
+  transition: margin 0.2s ease;
+}
+
+.sidebar:hover .nav-list li a i {
+  margin-right: 15px;
+}
+
+.sidebar .nav-list li a span {
+  display: none;
+}
+
+.sidebar:hover .nav-list li a span {
+  display: inline;
+}
+

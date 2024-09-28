@@ -1,0 +1,164 @@
+.billing-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+
+  .filter-section {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+
+      input, select {
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          flex-grow: 1;
+          transition: border-color 0.3s;
+
+          &:focus {
+              border-color: #2d39c3;
+          }
+      }
+  }
+
+  .summary-section {
+      display: flex;
+      gap: 20px;
+
+      .summary-box {
+          flex: 1;
+          padding: 15px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          background-color: #e8f0fe;
+          text-align: center;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+          transition: background-color 0.3s;
+
+          &:hover {
+              background-color: #d1e1ff;
+          }
+
+          h4 {
+              color: #2d39c3;
+          }
+
+          p {
+              font-size: 1.2em;
+              margin: 5px 0;
+          }
+      }
+  }
+
+  .section-heading {
+      font-size: 1.5em;
+      margin: 20px 0;
+      color: #2d39c3;
+      text-align: center;
+  }
+
+  .bills-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      .bill {
+          display: flex;
+          padding: 15px;
+          border-radius: 10px;
+          background-color: #f9f9f9;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+          // border: 1px solid #ccc;
+
+          .bill-details {
+              display: flex;
+              justify-content: space-between; /* Aligns sections */
+              align-items: center; /* Vertically centers content */
+              width: 100%; /* Full width to avoid overflow */
+          }
+
+          .bill-section {
+              flex: 1; /* Equal space for each section */
+              padding: 10px; /* Padding for spacing */
+              text-align: left; /* Left-align text */
+              // border: 1px solid #ddd; /* Added border for consistency */
+              border-radius: 5px; /* Consistent rounding */
+              margin: 0 5px; /* Space between sections */
+
+              &:nth-child(4) {
+                  display: flex;
+                  justify-content: flex-end; /* Align button to the right */
+                  padding: 0;
+
+                  .pay-now-button {
+                      background-color: #4caf50; /* Green button */
+                      color: white;
+                      border: none;
+                      padding: 10px 15px;
+                      border-radius: 5px;
+                      cursor: pointer;
+                      display: flex;
+                      align-items: center; /* Center icon and text */
+                      transition: background-color 0.3s;
+
+                      i {
+                          margin-right: 5px; /* Space between icon and text */
+                      }
+
+                      &:hover {
+                          background-color: #388e3c; /* Darker green on hover */
+                      }
+                  }
+              }
+          }
+      }
+  }
+
+  .no-bills-message {
+      color: #888;
+      font-style: italic;
+      text-align: center;
+  }
+
+  .pagination {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+
+      button {
+          background-color: #2d39c3;
+          color: white;
+          border: none;
+          padding: 10px;
+          border-radius: 5px;
+
+          &:hover {
+              background-color: #1e2f9c; /* Darker blue on hover */
+          }
+      }
+  }
+}
+
+// Mobile responsiveness
+@media (max-width: 768px) {
+  .billing-container {
+      padding: 10px;
+
+      .filter-section {
+          flex-direction: column;
+
+          input, select {
+              width: 100%;
+          }
+      }
+
+      .summary-section {
+          flex-direction: column;
+      }
+
+      .section-heading {
+          font-size: 1.2em; // Smaller on mobile
+      }
+  }
+}
