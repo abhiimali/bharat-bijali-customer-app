@@ -18,25 +18,26 @@ export class SendOtpComponent implements OnInit {
 
     const body = { customerId: this.customerId };
     
-    this.http.post<{ message: string }>('http://localhost:8080/api/customer/send-otp', body)
-      .subscribe(response => {
-        
-        this.notificationService.showSuccess(response.message);
-        
-        this.router.navigate(['authentication/verify-otp', this.customerId]);
-        
-      }, error => {
+    this.http.post('http://localhost:8080/auth/customer/send-otp', body, { responseType: 'text' })
+    .subscribe(response => {
+      console.log('Response:', response);
 
-        if (error.error && error.error.message) {
-          this.notificationService.showError(error.error.message); 
-        } else {
-          this.notificationService.showError("OTP not sent! Please try again.");
-        }
-        
-        this.router.navigate(['authentication/verify-otp', this.customerId]);
-        
-        console.error('Error sending OTP:', error);
-      });
+      // Assuming that if the status is 200, it's a success, navigate regardless of response type
+      this.notificationService.showSuccess("OTP sent successfully.");
+      this.router.navigate(['authentication/verify-otp', this.customerId]);
+    }, error => {
+      console.error('Error sending OTP:', error);
+
+      // Handle errors appropriately
+      let errorMessage = "OTP not sent! Please try again.";
+      if (error.error && error.error.message) {
+        errorMessage = error.error.message;
+      } else if (error.status === 200) {
+        errorMessage = "Unexpected response format from server.";
+      }
+      this.notificationService.showError(errorMessage);
+    });
+    
   }
   
 

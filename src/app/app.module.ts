@@ -16,10 +16,14 @@ import { MatCardModule } from '@angular/material/card';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { HttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { MatListModule } from '@angular/material/list';
+import { AuthInterceptorService } from './authentication/auth-interceptor.service';
+import { HttpClientModule } from '@angular/common/http';
+
+import { registerLocaleData } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -38,10 +42,17 @@ import { MatListModule } from '@angular/material/list';
     MatFormFieldModule,
     MatInputModule,
     MatSnackBarModule,
-    MatListModule
+    MatListModule,
+    HttpClientModule
     
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

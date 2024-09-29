@@ -18,11 +18,11 @@
   <div class="summary-section">
       <div class="summary-box total-amount">
           <h4>Total Amount Due</h4>
-          <p>${{ totalAmountDue }}</p>
+          <p>{{ totalAmountDue | currency:'INR':'symbol' }}</p>
       </div>
       <div class="summary-box current-usage">
           <h4>Current Month Usage</h4>
-          <p>{{ currentMonthUsage }} Bills</p>
+          <p>{{ currentMonthUsage }} Units</p>
       </div>
   </div>
 
@@ -36,7 +36,7 @@
                   <p><strong>Description:</strong> {{ bill.description }}</p>
               </div>
               <div class="bill-section amount-section">
-                  <p><strong>Amount:</strong> ${{ bill.amount }}</p>
+                  <p><strong>Amount:</strong> {{ bill.amount  | currency:'INR':'symbol' }}</p>
               </div>
               <div class="bill-section due-date-section">
                   <p><strong>Due Date:</strong> {{ bill.dueDate }}</p>
@@ -60,7 +60,7 @@
                   <p><strong>Description:</strong> {{ bill.description }}</p>
               </div>
               <div class="bill-section amount-section">
-                  <p><strong>Amount:</strong> ${{ bill.amount }}</p>
+                  <p><strong>Amount:</strong> {{ bill.amount | currency:'INR':'symbol' }}</p>
               </div>
               <div class="bill-section due-date-section">
                   <p><strong>Paid on:</strong> {{ bill.dueDate }}</p>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -10,6 +11,7 @@ export class NavbarComponent {
   isProfileMenuOpen = false; // Track profile menu dropdown state
   isAuthenticated = false; // Track authentication state
 
+  constructor( private router : Router ) {}
   // Toggle the navbar
   toggleNavbar() {
     this.isNavbarOpen = !this.isNavbarOpen;
@@ -22,6 +24,8 @@ export class NavbarComponent {
 
   // Method for navigation to login (implement as needed)
   navigateToLogin() {
+    
+    this.router.navigate(["/authentication"])
     // Your login navigation logic here
   }
 

@@ -53,12 +53,12 @@ export class VerifyOtpComponent implements OnInit {
   
     const body = { customerId: this.customerId, otpCode };
   
-    this.http.post<{ message: string }>('http://localhost:8080/api/customer/verify-otp', body)
+    this.http.post<{data: any, message: string, statusCode: number }>('http://localhost:8080/auth/customer/verify-otp', body)
       .subscribe(response => {
         this.notificationService.showSuccess(response.message);
-  
+        localStorage.setItem('authToken', response.data.token);
         console.log('Login successful:', response);
-        this.router.navigate(['/dashboard']);  
+        this.router.navigate(['/dashboard/bills']);  
   
       }, error => {
         if (error.error && error.error.message) {
@@ -66,7 +66,6 @@ export class VerifyOtpComponent implements OnInit {
         } else {
           this.notificationService.showError("OTP verification failed! Please try again."); // Fallback error message
         }
-  
         console.error('Error verifying OTP:', error);
       });
   }
