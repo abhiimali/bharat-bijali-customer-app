@@ -1,43 +1,30 @@
-<div class="payment-modal" *ngIf="isPaymentModalOpen">
-    <div class="modal-content">
-      <h2>Choose Payment Method</h2>
-      <div class="payment-options">
-        <button (click)="selectPaymentMethod('UPI')" class="payment-btn">UPI</button>
-        <button (click)="selectPaymentMethod('CARD')" class="payment-btn">Card</button>
-        <button (click)="selectPaymentMethod('NET_BANKING')" class="payment-btn">Net Banking</button>
-        <button (click)="settleInCash()" class="payment-btn cash-btn">Settle in Cash</button>
-      </div>
-  
-      <div class="payment-details" *ngIf="selectedPaymentMethod">
-        <div *ngIf="selectedPaymentMethod === 'UPI'">
-          <h3>Enter UPI ID</h3>
-          <input [(ngModel)]="upiId" placeholder="UPI ID" />
-          <button (click)="submitUPI()">Next</button>
-        </div>
-  
-        <div *ngIf="selectedPaymentMethod === 'CARD'">
-          <h3>Enter Card Details</h3>
-          <input [(ngModel)]="cardNumber" placeholder="Card Number" type="text" (input)="validateCardNumber()" />
-          <input [(ngModel)]="cardHolderName" placeholder="Card Holder Name" type="text" />
-          <input [(ngModel)]="cvv" placeholder="CVV" type="password" (input)="validateCVV()" />
-          <input [(ngModel)]="expiryDate" placeholder="MM/YY" type="text" (input)="validateExpiry()" />
-          <button (click)="submitCard()">Pay</button>
-        </div>
-  
-        <div *ngIf="selectedPaymentMethod === 'NET_BANKING'">
-          <h3>Enter Net Banking Credentials</h3>
-          <input [(ngModel)]="netBankingUsername" placeholder="Username" type="text" />
-          <input [(ngModel)]="netBankingPassword" placeholder="Password" type="password" />
-          <button (click)="submitNetBanking()">Next</button>
-        </div>
-  
-        <div *ngIf="selectedPaymentMethod === 'CASH'">
-          <h3>Cash Payment Requested</h3>
-          <p>Your cash payment request has been sent!</p>
-        </div>
-      </div>
-  
-      <button class="close-modal" (click)="closePaymentModal()">Close</button>
-    </div>
+<div class="payment-container">
+  <h2 class="payment-header">Bharat Bijali Payment Gateway</h2>
+  <div class="payment-options">
+    <button (click)="selectPaymentOption('UPI')" 
+            [class.selected]="selectedPaymentOption === 'UPI'" 
+            class="payment-button">
+      <i class="fab fa-cc-amazon-pay" aria-hidden="true"></i> UPI
+    </button>
+    <button (click)="selectPaymentOption('CARD')" 
+            [class.selected]="selectedPaymentOption === 'CARD'" 
+            class="payment-button">
+      <i class="fa fa-credit-card" aria-hidden="true"></i> Card
+    </button>
+    <button (click)="selectPaymentOption('NET_BANKING')" 
+            [class.selected]="selectedPaymentOption === 'NET_BANKING'" 
+            class="payment-button">
+      <i class="fa fa-university" aria-hidden="true"></i> Net Banking
+    </button>
   </div>
-  
+
+  <div *ngIf="selectedPaymentOption === 'UPI'">
+    <app-upi  [billId]="billId" ></app-upi>
+  </div>
+  <div *ngIf="selectedPaymentOption === 'CARD'">
+    <app-card [billId]="billId" ></app-card>
+  </div>
+  <div *ngIf="selectedPaymentOption === 'NET_BANKING'">
+    <app-netbanking  [billId]="billId" ></app-netbanking>
+  </div>
+</div>

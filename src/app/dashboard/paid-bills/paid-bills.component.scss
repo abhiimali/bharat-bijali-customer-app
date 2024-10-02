@@ -1,0 +1,145 @@
+.paid-bills-container {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.filter-section {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  background-color: #f9f9f9;
+  padding: 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.filter-section input,
+.filter-section select {
+  flex: 1;
+  min-width: 150px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  transition: border-color 0.3s ease;
+}
+
+.filter-section input:focus,
+.filter-section select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.filter-section input::placeholder {
+  color: #a0a0a0;
+  font-style: italic;
+}
+
+.filter-section select {
+  background-color: #ffffff;
+  color: #333;
+}
+
+.filter-section select option {
+  color: #333;
+}
+
+
+.section-heading {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+.paid-bill {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  margin-bottom: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.paid-bill:hover {
+  background-color: #f1f1f1;
+}
+
+.bill-content {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.bill-details-left {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.bill-details-right {
+  flex: 1;
+  text-align: right;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.action-buttons button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.view-invoice-button {
+  background-color: #007bff;
+  color: white;
+}
+
+.view-receipt-button {
+  background-color: #28a745;
+  color: white;
+}
+
+.action-buttons button:hover {
+  background-color: #0056b3;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  background-color: #007bff;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 0 10px;
+}
+
+.pagination button:disabled {
+  background-color: #e0e0e0;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  font-size: 1.2rem;
+}
+
+.pagination button:hover:not(:disabled) {
+  background-color: #0056b3;
+}

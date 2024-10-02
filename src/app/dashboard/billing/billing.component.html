@@ -1,76 +1,68 @@
 <div class="billing-container">
-  <div class="filter-section">
+    <!-- Filter Section -->
+    <div class="filter-section">
       <input type="text" placeholder="Search by Bill ID or Name" [(ngModel)]="searchQuery" />
       <select [(ngModel)]="selectedMonth">
-          <option value="">Month</option>
-          <option *ngFor="let month of ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER']">{{ month }}</option>
+        <option value="">Month</option>
+        <option *ngFor="let month of ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER']">{{ month }}</option>
       </select>
       <select [(ngModel)]="selectedYear">
-          <option value="">Year</option>
-          <option *ngFor="let year of [2024, 2023, 2022]">{{ year }}</option>
+        <option value="">Year</option>
+        <option *ngFor="let year of [2024, 2023, 2022]">{{ year }}</option>
       </select>
       <select [(ngModel)]="selectedBillType">
-          <option value="">Bill Type</option>
-          <option *ngFor="let type of ['ELECTRICITY', 'WATER', 'INTERNET', 'RECONNECTION']">{{ type }}</option>
+        <option value="">Bill Type</option>
+        <option *ngFor="let type of ['ELECTRICITY', 'WATER', 'INTERNET', 'RECONNECTION']">{{ type }}</option>
       </select>
-  </div>
-
-  <div class="summary-section">
+    </div>
+  
+    <!-- Summary Section -->
+    <div class="summary-section">
       <div class="summary-box total-amount">
-          <h4>Total Amount Due</h4>
-          <p>{{ totalAmountDue | currency:'INR':'symbol' }}</p>
+        <i class="fa fa-money-bill-wave"></i>
+        <h4>Total Amount Due</h4>
+        <p>{{ totalAmountDue | currency:'INR':'symbol' }}</p>
       </div>
-      <div class="summary-box current-usage">
-          <h4>Current Month Usage</h4>
-          <p>{{ currentMonthUsage }} Units</p>
+      <div class="summary-box total-units">
+        <i class="fa fa-tachometer-alt"></i>
+        <h4>Total Units Consumed</h4>
+        <p> {{ currentMonthUsage }}</p>
       </div>
-  </div>
-
-  <h3 class="section-heading">Pending Bills</h3>
-  <div *ngIf="pendingBills.length === 0" class="no-bills-message">No pending bills.</div>
-  <div class="bills-list">
+    </div>
+  
+    <!-- Pending Bills Section -->
+    <h3 class="section-heading">Pending Bills</h3>
+    <div *ngIf="pendingBills.length === 0" class="no-bills-message">No pending bills.</div>
+    
+    <div class="pending-bills-grid">
       <div class="bill" *ngFor="let bill of pendingBills">
-          <div class="bill-details">
-              <div class="bill-section">
-                  <h4>{{ bill.billName }}</h4>
-                  <p><strong>Description:</strong> {{ bill.description }}</p>
-              </div>
-              <div class="bill-section amount-section">
-                  <p><strong>Amount:</strong> {{ bill.amount  | currency:'INR':'symbol' }}</p>
-              </div>
-              <div class="bill-section due-date-section">
-                  <p><strong>Due Date:</strong> {{ bill.dueDate }}</p>
-              </div>
-              <div class="bill-section pay-button-section">
-                  <button (click)="openPaymentOptions(bill.billId, bill.billId)" class="pay-now-button">
-                      <i class="fa fa-credit-card" aria-hidden="true"></i> Pay Now
-                  </button>
-
-              </div>
+        <div class="bill-details-grid">
+          <div class="bill-section bill-name">
+            <h4>{{ bill.billName }}</h4>
+            <p>{{ bill.description }}</p>
           </div>
-      </div>
-  </div>
-
-  <h3 class="section-heading">Paid Bills</h3>
-  <div class="bills-list">
-      <div class="bill" *ngFor="let bill of paidBills">
-          <div class="bill-details">
-              <div class="bill-section">
-                  <h4>{{ bill.billName }}</h4>
-                  <p><strong>Description:</strong> {{ bill.description }}</p>
-              </div>
-              <div class="bill-section amount-section">
-                  <p><strong>Amount:</strong> {{ bill.amount | currency:'INR':'symbol' }}</p>
-              </div>
-              <div class="bill-section due-date-section">
-                  <p><strong>Paid on:</strong> {{ bill.dueDate }}</p>
-              </div>
+          <div class="bill-section amount-section">
+            <p><strong>Amount:</strong> {{ bill.amount | currency:'INR':'symbol' }}</p>
           </div>
+          <div class="bill-section offer-section">
+            <p class="offer-text">💡 Special Offer: Pay Before Due & Save 5%, Pay Online & Save 5%!</p>
+            <p><strong>Total Discount:</strong> {{ calculateTotalDiscount(bill.amount) | currency:'INR':'symbol' }}</p>
+            <p><strong>Final Amount:</strong> {{ calculateFinalAmount(bill.amount) | currency:'INR':'symbol' }}</p>
+          </div>
+          <div class="bill-section due-date-section">
+            <p><strong>Due Date:</strong> {{ bill.dueDate }}</p>
+          </div>
+          <div class="bill-section action-section">
+            <button (click)="openPaymentOptions(bill.billId)" class="pay-now-button">
+              <i class="fa fa-credit-card"></i> Pay Now
+            </button>
+            <button (click)="viewInvoice(bill.billId)" class="view-invoice-button">
+              <i class="fa fa-file-invoice"></i> View Invoice
+            </button>
+            <button [routerLink]="['/dashboard/invoice', bill.billId]">Generate Invoice</button>
+          </div>
+        </div>
       </div>
+    </div>
   </div>
-
-  <div class="pagination">
-      <button>Previous</button>
-      <button>Next</button>
-  </div>
-</div>
+  

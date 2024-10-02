@@ -1,0 +1,69 @@
+<div class="paid-bills-container">
+  <h2 class="section-heading">Paid Bills</h2>
+
+  <div class="filter-section">
+    <input type="text" placeholder="Search..." [(ngModel)]="searchQuery" />
+    
+    <select [(ngModel)]="selectedMonth">
+      <option value="">Select Month</option>
+      <option value="JANUARY">January</option>
+      <option value="FEBRUARY">February</option>
+      <option value="MARCH">March</option>
+      <option value="APRIL">April</option>
+      <option value="MAY">May</option>
+      <option value="JUNE">June</option>
+      <option value="JULY">July</option>
+      <option value="AUGUST">August</option>
+      <option value="SEPTEMBER">September</option>
+      <option value="OCTOBER">October</option>
+      <option value="NOVEMBER">November</option>
+      <option value="DECEMBER">December</option>
+    </select>
+
+    <select [(ngModel)]="selectedYear">
+      <option value="">Select Year</option>
+      <option *ngFor="let year of [2024, 2023, 2022]">{{ year }}</option>
+    </select>
+
+    <select [(ngModel)]="selectedBillType">
+      <option value="">Select Bill Type</option>
+      <option value="ELECTRICITY">Electricity</option>
+      <option value="WATER">Water</option>
+      <option value="GAS">Gas</option>
+      <!-- Add more bill types as needed -->
+    </select>
+  </div>
+
+  <!-- <div class="bill-summary">
+    <h3>Total Amount Paid: {{ totalAmountPaid | currency:'INR':'symbol' }}</h3>
+  </div> -->
+
+  <div class="paid-bills-list">
+    <div *ngFor="let bill of paidBills" class="paid-bill">
+      <div class="bill-content">
+        <div class="bill-details-left">
+          <h4>{{ bill.billName }}</h4>
+          <p>Description: {{ bill.description }}</p>
+          <p>Amount: {{ bill.amount |  currency:'INR':'symbol' }}</p>
+          <p>Due Date: {{ bill.dueDate }}</p>
+          <p>Paid Date: {{ bill.updatedAt }}</p>
+          <p>Units Consumed: {{ bill.unitConsumed }}</p>
+        </div>
+
+        <div class="bill-details-right">
+          <div class="action-buttons">
+            <!-- <button (click)="viewInvoice(bill.billId)" class="view-invoice-button">View Invoice</button> -->
+            <button (click)="viewReceipt(bill.billId)" class="view-receipt-button">View Receipt</button>
+            <button [routerLink]="['/dashboard/invoice', bill.billId]" class="view-invoice-button">Generate Invoice</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="pagination">
+    <button class="pagination-button" [disabled]="currentPage === 1" (click)="prevPage()">Previous</button>
+    <span>Page {{ currentPage }} of {{ totalPages }}</span>
+    <button class="pagination-button" [disabled]="currentPage === totalPages" (click)="nextPage()">Next</button>
+  </div>
+</div> -->

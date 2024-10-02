@@ -27,8 +27,6 @@ export class SendOtpComponent implements OnInit {
       this.router.navigate(['authentication/verify-otp', this.customerId]);
     }, error => {
       console.error('Error sending OTP:', error);
-
-      // Handle errors appropriately
       let errorMessage = "OTP not sent! Please try again.";
       if (error.error && error.error.message) {
         errorMessage = error.error.message;

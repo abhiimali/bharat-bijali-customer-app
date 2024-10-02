@@ -1,0 +1,56 @@
+<div class="invoice-container" id="invoice" *ngIf="invoiceData">
+    <h1>Invoice</h1>
+    <div class="company-info">
+      <h2>{{ invoiceData.companyName }}</h2>
+      <p>GST Number: {{ invoiceData.gstNumber }}</p>
+      <p>{{ invoiceData.companyAddress }}</p>
+      <p>Invoice Date: {{ invoiceData.invoiceDate }}</p>
+    </div>
+  
+    <div class="customer-info">
+      <h3>Customer Information</h3>
+      <p><strong>Customer Name:</strong> {{ invoiceData.customerName }}</p>
+      <p><strong>Email:</strong> {{ invoiceData.email }}</p>
+      <p><strong>Phone:</strong> {{ invoiceData.phoneNumber }}</p>
+      <p><strong>Address:</strong> {{ invoiceData.address }}</p>
+    </div>
+  
+    <table class="details">
+      <tr>
+        <th>Description</th>
+        <td>{{ invoiceData.description }}</td>
+      </tr>
+      <tr>
+        <th>Bill Name</th>
+        <td>{{ invoiceData.billName }}</td>
+      </tr>
+      <tr>
+        <th>Amount</th>
+        <td>&#8377;{{ invoiceData.amount }}</td>
+      </tr>
+      <tr>
+        <th>Discount Applied</th>
+        <td>{{ invoiceData.discountApplied ? invoiceData.discountApplied : 'N/A' }}</td>
+      </tr>
+      <tr>
+        <th>Final Amount</th>
+        <td>&#8377;{{ invoiceData.finalAmount }}</td>
+      </tr>
+      <tr>
+        <th>Due Date</th>
+        <td>{{ invoiceData.dueDate }}</td>
+      </tr>
+      <tr>
+        <th>Bill Year</th>
+        <td>{{ invoiceData.billYear }}</td>
+      </tr>
+    </table>
+  
+    <div class="summary">
+      <p><strong>Total Amount: &#8377;{{ invoiceData.finalAmount }}</strong></p>
+      <p><strong>Due Date: {{ invoiceData.dueDate }}</strong></p>
+    </div>
+  
+    <button (click)="generatePDF()">Download PDF</button>
+  </div>
+  

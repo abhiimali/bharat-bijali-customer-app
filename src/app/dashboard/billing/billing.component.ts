@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog'; // Import MatDialog
 import { PaymentOptionComponent } from '../payment-options-component/payment-options-component.component';
+import {  Router } from '@angular/router';
+import { NotificationService } from 'src/app/common/notification/notification.service';
 
 interface Bill {
   billId: number;
@@ -25,7 +27,9 @@ interface Bill {
 })
 export class BillingComponent implements OnInit {
 
-  constructor(private http: HttpClient, private dialog: MatDialog) {}
+  constructor(private http: HttpClient, private dialog: MatDialog , private router : Router,
+    private notification : NotificationService
+  ) {}
 
   searchQuery: string = '';
   selectedMonth: string = '';
@@ -50,6 +54,8 @@ export class BillingComponent implements OnInit {
           this.bills = response.data; // Assuming data is returned inside "data" field
         },
         (error) => {
+
+          this.notification.showError("Session Expired Please Login Again")
           console.error('Error fetching bills:', error);
         }
       );
@@ -61,16 +67,8 @@ export class BillingComponent implements OnInit {
     this.isPaymentModalOpen = true; // Open the modal
   }
 
-  openPaymentOptions(customerId: number, billId: number) {
-    const dialogRef = this.dialog.open(PaymentOptionComponent, {
-      width: '400px',
-      data: { billId: billId, customerId: customerId }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      // Handle the result if needed
-      console.log('The dialog was closed');
-    });
+  openPaymentOptions(billId: number) {
+    this.router.navigate(['/dashboard/payment', billId]);
   }
 
   closePaymentModal() {
@@ -80,6 +78,22 @@ export class BillingComponent implements OnInit {
     this.billId = null; // Reset bill ID
   }
 
+  calculateTotalDiscount(amount: number): number {
+    const discount = 0.05; // 5% for each offer
+    const totalDiscount = amount * discount * 2; // Applying both discounts
+    return totalDiscount;
+  }
+  
+  calculateFinalAmount(amount: number): number {
+    const totalDiscount = this.calculateTotalDiscount(amount);
+    return amount - totalDiscount;
+  }
+  
+  viewInvoice(billId: number): void {
+    // Placeholder for invoice viewing logic, implement later with API call
+    console.log(`Viewing invoice for bill: ${billId}`);
+  }
+  
   // Get pending bills
   get pendingBills() {
     return this.filterBills('PENDING');

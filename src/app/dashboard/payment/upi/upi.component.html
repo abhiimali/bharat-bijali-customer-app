@@ -1,0 +1,23 @@
+<div class="upi-container">
+  <div *ngIf="!showMpinInput">
+    <label for="upiId">Enter UPI ID:</label>
+    <input type="text" id="upiId" [(ngModel)]="upiId" placeholder="example@upi" (blur)="validateUpiId()">
+    <div *ngIf="upiIdError" class="error-message">{{ upiIdError }}</div>
+    <button (click)="continue()" [disabled]="upiIdError || !upiId">Continue</button>
+  </div>
+
+  <div *ngIf="showMpinInput">
+    <div class="back-arrow" (click)="goBack()">
+      <i class="fa fa-arrow-left" aria-hidden="true"></i> Back
+    </div>
+    <label for="mpin">Enter MPIN:</label>
+    <input type="password" id="mpin" [(ngModel)]="mpin" placeholder="Enter 4 Or 6 digit MPIN" maxlength="6" (blur)="validateMpin()">
+    <div *ngIf="mpinError" class="error-message">{{ mpinError }}</div>
+    <button (click)="pay()" [disabled]="mpinError || !mpin">Pay</button>
+  </div>
+
+  <div *ngIf="paymentStatus" class="payment-status">{{ paymentStatus }}</div>
+
+  <!-- Include the PaymentSuccessComponent here -->
+  <app-payment-success *ngIf="paymentStatus && paymentStatus.includes('successful')" [message]="paymentStatus"></app-payment-success>
+</div>

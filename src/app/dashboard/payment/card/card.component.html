@@ -1,0 +1,31 @@
+<div class="card-container">
+  <h2>Card Payment</h2>
+  
+  <div *ngIf="!showOtpInput">
+    <label for="cardHolderName">Card Holder Name:</label>
+<input type="text" id="cardHolderName" [(ngModel)]="cardHolderName" placeholder="Enter Card Holder Name">
+
+
+    <label for="cardNumber">Card Number:</label>
+    <input type="text" id="cardNumber" [(ngModel)]="cardNumber" placeholder="XXXX-XXXX-XXXX-XXXX" (input)="validateCardNumber()" maxlength="19">
+    <div *ngIf="cardNumberError" class="error-message">{{ cardNumberError }}</div>
+
+    <label for="expiryDate">Expiry Date:</label>
+    <input type="text" id="expiryDate" [(ngModel)]="expiryDate" placeholder="MM/YY" (input)="validateExpiryDate()" maxlength="5">
+    <div *ngIf="expiryDateError" class="error-message">{{ expiryDateError }}</div>
+
+    <label for="cvv">CVV:</label>
+    <input type="password" id="cvv" [(ngModel)]="cvv" placeholder="***" (input)="validateCvv()" maxlength="3">
+    <div *ngIf="cvvError" class="error-message">{{ cvvError }}</div>
+
+    <button [disabled]="!isFormValid()" (click)="continue()">Continue</button>
+  </div>
+
+  <div *ngIf="showOtpInput">
+    <label for="otp">Enter OTP:</label>
+    <input type="text" id="otp" [(ngModel)]="otp" placeholder="Enter OTP" maxlength="6">
+    <button (click)="pay()">Pay</button>
+  </div>
+
+  <div *ngIf="paymentStatus" class="payment-status">{{ paymentStatus }}</div>
+</div>

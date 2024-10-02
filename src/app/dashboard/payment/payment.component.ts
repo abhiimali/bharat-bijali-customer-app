@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-payment',
@@ -6,56 +7,22 @@ import { Component } from '@angular/core';
   styleUrls: ['./payment.component.scss']
 })
 export class PaymentComponent {
-  isPaymentModalOpen = false;
-  selectedPaymentMethod: string | null = null;
-  upiId: string = '';
-  cardNumber: string = '';
-  cardHolderName: string = '';
-  cvv: string = '';
-  expiryDate: string = '';
-  netBankingUsername: string = '';
-  netBankingPassword: string = '';
+ 
+  selectedPaymentOption: string | null = null;
 
-  openPaymentModal() {
-    this.isPaymentModalOpen = true;
+  selectPaymentOption(option: string) {
+    this.selectedPaymentOption = option;
   }
 
-  closePaymentModal() {
-    this.isPaymentModalOpen = false;
-    this.selectedPaymentMethod = null;
+  billId!: number;
+
+  constructor(private route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+      this.billId = +params.get('billId')!;
+    });
   }
 
-  selectPaymentMethod(method: string) {
-    this.selectedPaymentMethod = method;
-  }
 
-  validateCardNumber() {
-    // Only allow digits
-    this.cardNumber = this.cardNumber.replace(/[^0-9]/g, '');
-  }
-
-  validateCVV() {
-    // Only allow digits
-    this.cvv = this.cvv.replace(/[^0-9]/g, '');
-  }
-
-  validateExpiry() {
-    // Handle expiry date validation if needed
-  }
-
-  submitUPI() {
-    // Implement UPI submission logic
-  }
-
-  submitCard() {
-    // Implement Card submission logic
-  }
-
-  submitNetBanking() {
-    // Implement Net Banking submission logic
-  }
-
-  settleInCash() {
-    // Logic to handle cash settlement request
-  }
 }

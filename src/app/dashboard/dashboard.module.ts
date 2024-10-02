@@ -15,7 +15,13 @@ import { FormsModule } from '@angular/forms';
 import { PaymentComponent } from './payment/payment.component';
 import { PaymentOptionComponent } from './payment-options-component/payment-options-component.component'; // Import FormsModule
 
-import { MatDialogModule } from '@angular/material/dialog'; // Import MatDialogModule
+import { MatDialogModule } from '@angular/material/dialog';
+import { UpiComponent } from './payment/upi/upi.component';
+import { CardComponent } from './payment/card/card.component';
+import { NetbankingComponent } from './payment/netbanking/netbanking.component';
+import { PaidBillsComponent } from './paid-bills/paid-bills.component';
+import { PaymentSuccessComponent } from './payment/payment-success/payment-success.component';
+import { InvoiceComponent } from './invoice/invoice.component'; // Import MatDialogModule
 
 
 @NgModule({
@@ -24,7 +30,13 @@ import { MatDialogModule } from '@angular/material/dialog'; // Import MatDialogM
     BillingComponent,
     SidebarComponent,
     PaymentComponent,
-    PaymentOptionComponent
+    PaymentOptionComponent,
+    UpiComponent,
+    CardComponent,
+    NetbankingComponent,
+    PaidBillsComponent,
+    PaymentSuccessComponent,
+    InvoiceComponent
   ],
   imports: [
     CommonModule,
