@@ -1,0 +1,47 @@
+.transaction-container {
+    padding: 20px;
+  
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  
+    .filters-container {
+      display: flex;
+      align-items: center; /* Center items vertically */
+      justify-content: space-between; /* Space between items */
+      margin-bottom: 20px;
+  
+      .filter-item {
+        margin-right: 10px; /* Space between filter items */
+        min-width: 150px; /* Adjust as necessary */
+      }
+  
+      .filter-button {
+        margin-left: 10px; /* Space between buttons */
+      }
+    }
+  
+    .transaction-table {
+      width: 100%;
+    }
+  
+    .status-badge {
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+  
+      &.status-success {
+        color: green;
+      }
+  
+      &.status-failed {
+        color: red;
+      }
+  
+      &.status-pending {
+        color: orange;
+      }
+    }
+  }
+  

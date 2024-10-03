@@ -1,6 +1,6 @@
-import { Component, OnInit , Input } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { PaymentService } from '../payment.service';
 
 @Component({
   selector: 'app-card',
@@ -8,17 +8,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./card.component.scss']
 })
 export class CardComponent implements OnInit {
-
   cardNumber: string = '';
   expiryDate: string = '';
   cvv: string = '';
   otp: string = '';
   showOtpInput: boolean = false;
   paymentStatus: string | null = null;
-  transactionId: string = ''; // Transaction ID from backend
+  transactionId: string = '';
 
   cardHolderName: string = '';
-cardHolderNameError: boolean = false;
+  cardHolderNameError: boolean = false;
 
   @Input() billId!: number;
 
@@ -27,7 +26,9 @@ cardHolderNameError: boolean = false;
   expiryDateError: string | null = null;
   cvvError: string | null = null;
 
-  constructor(private http: HttpClient, private router: Router) { }
+  paymentStatusClass: string = '';
+
+  constructor(private paymentService: PaymentService, private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -51,7 +52,23 @@ cardHolderNameError: boolean = false;
   }
 
   isFormValid(): boolean {
-    return !this.cardHolderNameError && !this.cardNumberError && !this.expiryDateError && !this.cvvError && !!this.cardNumber && !!this.expiryDate && !!this.cvv;
+    return (
+      !this.cardHolderNameError &&
+      !this.cardNumberError &&
+      !this.expiryDateError &&
+      !this.cvvError &&
+      !!this.cardNumber &&
+      !!this.expiryDate &&
+      !!this.cvv &&
+      !!this.cardHolderName
+    );
+  }
+
+  formatCardNumber() {
+    const cleaned = this.cardNumber.replace(/\s+/g, '').replace(/[^0-9]/g, '');
+    const formatted = cleaned.match(/.{1,4}/g)?.join(' ') || '';
+    this.cardNumber = formatted;
+    this.validateCardNumber();
   }
 
   continue() {
@@ -61,14 +78,27 @@ cardHolderNameError: boolean = false;
         amount: 99,
         paymentType: 'CARD',
         cardHolderName: this.cardHolderName,
-        cardNumber: this.cardNumber,
+        cardNumber: this.cardNumber.replace(/\s+/g, ''),
         cvv: this.cvv,
         expiryDate: this.expiryDate
       };
 
-      this.http.post('http://localhost:8080/api/payment/pay', payload).subscribe((response: any) => {
-        this.transactionId = response.data;
-        this.showOtpInput = true;
+      this.paymentService.makeCardPayment(payload).subscribe({
+        next: (response: any) => {
+          if (response.statusCode === 200) {
+            this.transactionId = response.data;
+            this.showOtpInput = true;
+            this.paymentStatus = null; // Clear previous status messages
+            this.paymentStatusClass = ''; // Clear previous status class
+          } else {
+            this.paymentStatus = response.message;
+            this.paymentStatusClass = 'error-message'; // Use error class for styling
+          }
+        },
+        error: () => {
+          this.paymentStatus = 'An error occurred. Please try again.';
+          this.paymentStatusClass = 'error-message'; // Use error class for styling
+        }
       });
     }
   }
@@ -79,15 +109,24 @@ cardHolderNameError: boolean = false;
       otp: this.otp
     };
 
-    this.http.post('http://localhost:8080/api/payment/verify-card-payment', payload).subscribe((response: any) => {
-      if (response.statusCode === 200) {
-        this.paymentStatus = 'Payment Successful!';
-        setTimeout(() => {
-          this.router.navigate(['/dashboard/bills']);
-        }, 2000);
-      } else {
-        this.paymentStatus = 'Payment Failed. Please try again.';
+    this.paymentService.verifyCardPayment(payload).subscribe({
+      next: (response: any) => {
+        if (response.statusCode === 200) {
+          this.paymentStatus = `Payment Successful! Amount: ₹${response.data.amount}, Transaction ID: ${response.data.transactionId}`;
+          this.paymentStatusClass = 'success-message'; // Add success class
+          setTimeout(() => {
+            this.router.navigate(['/dashboard/bills']);
+          }, 5000); 
+        } else {
+          this.paymentStatus = 'Payment Failed. Please try again.';
+          this.paymentStatusClass = 'error-message'; 
+        }
+      },
+      error: () => {
+        this.paymentStatus = 'An error occurred. Please try again.';
+        this.paymentStatusClass = 'error-message';
       }
     });
   }
+
 }

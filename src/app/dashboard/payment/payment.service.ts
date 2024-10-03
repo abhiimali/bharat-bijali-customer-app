@@ -13,6 +13,14 @@ export class PaymentService {
   payWithUpi(paymentData: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/pay`, paymentData);
   }
-  
+
+  makeCardPayment(payload: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/pay`, payload);
+  }
+
+  verifyCardPayment(payload: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/verify-card-payment`, payload);
+  }
+
 
 }

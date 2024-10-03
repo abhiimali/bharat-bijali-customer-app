@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { InvoiceService } from './invoice.service';
 import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 
@@ -12,8 +13,10 @@ import html2canvas from 'html2canvas';
 export class InvoiceComponent implements OnInit {
   invoiceData: any;
   billId!: number;
-
-  constructor(private invoiceService: InvoiceService, private route: ActivatedRoute) { }
+  errorMessage: string | null = null;
+  constructor(private invoiceService: InvoiceService, private route: ActivatedRoute,
+    private location: Location
+  ) { }
 
   ngOnInit(): void {
     // Get billId from the route
@@ -25,9 +28,24 @@ export class InvoiceComponent implements OnInit {
 
   getInvoice(billId: number): void {
     this.invoiceService.getInvoice(billId).subscribe(response => {
-      this.invoiceData = response.data;
+      if (response.statusCode === 200) {
+        this.invoiceData = response.data;
+        console.log(this.invoiceData)
+        this.errorMessage = null; // Clear error if data is found
+      } else {
+        this.invoiceData = null; // Clear invoice data
+        this.errorMessage = response.message; // Set error message
+      }
+    }, error => {
+      // Optional: Handle network or other server-side errors here
+      this.errorMessage = 'Something went wrong. Please try again later.';
     });
   }
+
+  goBack(): void {
+    this.location.back(); // Navigate to the previous page
+  }
+
 
   generatePDF(): void {
     const invoiceElement = document.getElementById('invoice')!;

@@ -1,1 +1,17 @@
-<p>payment-success works!</p>
+<div *ngIf="paymentSuccess" class="payment-status success">
+    <div class="icon">
+      <i class="checkmark">✓</i>
+    </div>
+    <h2>Thanks for Paying!</h2>
+    <p>Transaction ID: {{ transactionId }}</p>
+    <p>Amount Paid: {{ amount | currency }}</p>
+  </div>
+  
+  <div *ngIf="paymentFailure" class="payment-status failure">
+    <div class="icon">
+      <i class="cross">✕</i>
+    </div>
+    <h2>Payment Failed</h2>
+    <p>Please try again.</p>
+  </div>
+  

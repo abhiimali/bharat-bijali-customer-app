@@ -1,0 +1,48 @@
+.payment-status {
+    text-align: center;
+    margin-top: 50px;
+  
+    .icon {
+      display: inline-block;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background-color: #e0e0e0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+  
+      .checkmark {
+        color: #4caf50;
+        font-size: 40px;
+      }
+  
+      .cross {
+        color: #f44336;
+        font-size: 40px;
+      }
+    }
+  
+    h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+  
+    p {
+      font-size: 18px;
+    }
+  
+    &.success {
+      .icon {
+        background-color: #e8f5e9;
+      }
+    }
+  
+    &.failure {
+      .icon {
+        background-color: #ffebee;
+      }
+    }
+  }
+  

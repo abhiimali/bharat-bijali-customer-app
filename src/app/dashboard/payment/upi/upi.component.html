@@ -16,8 +16,22 @@
     <button (click)="pay()" [disabled]="mpinError || !mpin">Pay</button>
   </div>
 
-  <div *ngIf="paymentStatus" class="payment-status">{{ paymentStatus }}</div>
+<div *ngIf="paymentStatus" class="payment-status-container">
+  <div *ngIf="paymentStatus === 'successful'" class="payment-status success">
+    <div class="icon-container">
+      <i class="checkmark">✓</i>
+    </div>
+    <h2>Payment Successful!</h2>
+    <p>Your payment of <strong>₹{{ amount }}</strong> was successful.</p> <!-- Clear message -->
+    <p>Transaction ID: <strong>{{ transactionId }}</strong></p>
+  </div>
 
-  <!-- Include the PaymentSuccessComponent here -->
-  <app-payment-success *ngIf="paymentStatus && paymentStatus.includes('successful')" [message]="paymentStatus"></app-payment-success>
+  <div *ngIf="paymentStatus !== 'successful'" class="payment-status failure">
+    <div class="icon-container">
+      <i class="cross">✕</i>
+    </div>
+    <h2>Payment Failed</h2>
+    <p>{{ paymentStatus }}</p>
+    <button (click)="goBack()">Try Again</button>
+  </div>
 </div>

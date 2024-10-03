@@ -1,8 +1,6 @@
-// upi.component.ts
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PaymentService } from '../payment.service'; // Importing the payment service
-import { PaymentSuccessComponent } from '../payment-success/payment-success.component'; // Importing the success component
 
 @Component({
   selector: 'app-upi',
@@ -18,7 +16,8 @@ export class UpiComponent implements OnInit {
   paymentStatus: string | null = null;
   upiIdError: string | null = null;
   mpinError: string | null = null;
-  amount : number = 89
+  amount: number | null = null; // Store amount from API
+  transactionId: string | null = null; // Store transaction ID
 
   constructor(
     private paymentService: PaymentService, // Injecting the payment service
@@ -42,6 +41,8 @@ export class UpiComponent implements OnInit {
     this.showMpinInput = false;
     this.mpin = '';
     this.paymentStatus = null;
+    this.amount = null;
+    this.transactionId = null; // Reset the transaction ID
   }
 
   continue() {
@@ -55,7 +56,7 @@ export class UpiComponent implements OnInit {
 
     const paymentData = {
       billId: this.billId,
-      amount :89,
+      amount: 89, // The amount being sent for payment processing
       paymentType: 'UPI',
       upiId: this.upiId,
       mpin: this.mpin
@@ -64,7 +65,15 @@ export class UpiComponent implements OnInit {
     this.paymentService.payWithUpi(paymentData).subscribe(
       (response: any) => {
         if (response.statusCode === 200) {
-          this.showPaymentSuccess(response.data.transactionId, response.data.amount);
+          this.amount = response.data.amount; // Store amount returned by the API
+          this.transactionId = response.data.transactionId; // Store transaction ID
+          this.paymentStatus = 'successful';
+
+          setTimeout(() => {
+            this.router.navigate(['/dashboard/bills']);
+          }, 5000);
+
+          
         } else {
           this.paymentStatus = response.message;
         }
@@ -73,15 +82,5 @@ export class UpiComponent implements OnInit {
         this.paymentStatus = error.message;
       }
     );
-  }
-
-  private showPaymentSuccess(transactionId: string, amount: number) {
-    // Logic to display the success component with animation
-    const successMessage = `Payment of ₹${amount} was successful! Transaction ID: ${transactionId}`;
-    this.paymentStatus = successMessage;
-
-    setTimeout(() => {
-      this.router.navigate(['/dashboard/bills']);
-    }, 5000); // Redirect after 5 seconds
   }
 }

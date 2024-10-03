@@ -1,58 +1,104 @@
+.invoice-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #f8f8f8;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.back-button, .download-button {
+  background-color: #333;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.back-button:hover, .download-button:hover {
+  background-color: #555;
+}
+
 .invoice-container {
-    width: 800px;
-    margin: auto;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
-    font-family: 'Arial', sans-serif;
-  }
-  
-  h1, h2 {
-    text-align: center;
-    color: #333;
-  }
-  
-  .company-info, .customer-info {
-    margin-bottom: 20px;
-  }
-  
-  .details {
-    width: 100%;
-    margin-bottom: 20px;
-    border-collapse: collapse;
-  }
-  
-  .details th, .details td {
-    padding: 10px;
-    border: 1px solid #ddd;
-    text-align: left;
-  }
-  
-  .details th {
-    background-color: #f0f0f0;
-  }
-  
-  .summary {
-    text-align: right;
-    margin-top: 20px;
-  }
-  
-  .summary p {
-    font-size: 18px;
-  }
-  
-  button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  button:hover {
-    background-color: #45a049;
-  }
-  
+  width: 800px;
+  margin: auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.company-logo {
+  width: 80px;
+  margin-bottom: 10px;
+}
+
+.slogan {
+  font-style: italic;
+  color: #555;
+  font-size: 16px;
+}
+
+h1, h2, h3 {
+  text-align: center;
+  color: #333;
+}
+
+.company-info, .customer-info {
+  margin-bottom: 20px;
+}
+
+.details {
+  width: 100%;
+  margin-bottom: 20px;
+  border-collapse: collapse;
+}
+
+.details th, .details td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.details th {
+  background-color: #f0f0f0;
+}
+
+.summary {
+  text-align: right;
+  margin-top: 20px;
+}
+
+.summary p {
+  font-size: 18px;
+  color: #333;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+.error-message {
+  text-align: center;
+  color: #ff0000;
+  font-size: 18px;
+  margin: 20px 0;
+}

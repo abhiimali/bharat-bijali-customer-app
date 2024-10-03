@@ -21,8 +21,19 @@ import { CardComponent } from './payment/card/card.component';
 import { NetbankingComponent } from './payment/netbanking/netbanking.component';
 import { PaidBillsComponent } from './paid-bills/paid-bills.component';
 import { PaymentSuccessComponent } from './payment/payment-success/payment-success.component';
-import { InvoiceComponent } from './invoice/invoice.component'; // Import MatDialogModule
+import { InvoiceComponent } from './invoice/invoice.component';
+import { PaymentReceiptComponent } from './payment-receipt/payment-receipt.component';
+import { TransactionComponent } from './transaction/transaction.component'; // Import MatDialogModule
 
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatNativeDateModule } from '@angular/material/core';
+
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDatepickerToggle } from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [
@@ -36,7 +47,9 @@ import { InvoiceComponent } from './invoice/invoice.component'; // Import MatDia
     NetbankingComponent,
     PaidBillsComponent,
     PaymentSuccessComponent,
-    InvoiceComponent
+    InvoiceComponent,
+    PaymentReceiptComponent,
+    TransactionComponent
   ],
   imports: [
     CommonModule,
@@ -47,7 +60,15 @@ import { InvoiceComponent } from './invoice/invoice.component'; // Import MatDia
     MatListModule,
     MatToolbarModule,
     FormsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatIconModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatNativeDateModule,
+    MatDatepickerModule
   ]
 })
 export class DashboardModule { }

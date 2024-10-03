@@ -6,6 +6,8 @@ import { AuthenticationGuard } from '../authentication/authentication.guard';
 import { PaymentComponent } from './payment/payment.component';
 import { PaidBillsComponent } from './paid-bills/paid-bills.component';
 import { InvoiceComponent } from './invoice/invoice.component';
+import { PaymentReceiptComponent } from './payment-receipt/payment-receipt.component';
+import { TransactionComponent } from './transaction/transaction.component';
 
 const routes: Routes = [
   {
@@ -17,7 +19,10 @@ const routes: Routes = [
       { path: 'bills', component: BillingComponent },
       {path:'paidbills', component : PaidBillsComponent},
       { path: 'payment/:billId', component: PaymentComponent },
-      { path: 'invoice/:billId', component: InvoiceComponent }
+      { path: 'invoice/:billId', component: InvoiceComponent },
+      { path: 'payment-receipt/:billId', component: PaymentReceiptComponent },
+      {path : 'transactions' , component : TransactionComponent}
+
 
     ]
   }

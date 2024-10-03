@@ -52,8 +52,7 @@
 
         <div class="bill-details-right">
           <div class="action-buttons">
-            <!-- <button (click)="viewInvoice(bill.billId)" class="view-invoice-button">View Invoice</button> -->
-            <button (click)="viewReceipt(bill.billId)" class="view-receipt-button">View Receipt</button>
+            <button [routerLink]="['/dashboard/payment-receipt', bill.billId]" class="view-receipt-button">View Payment Receipt</button>
             <button [routerLink]="['/dashboard/invoice', bill.billId]" class="view-invoice-button">Generate Invoice</button>
           </div>
         </div>

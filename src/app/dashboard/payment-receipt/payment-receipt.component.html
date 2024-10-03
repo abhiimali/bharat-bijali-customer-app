@@ -1,0 +1,54 @@
+<div class="receipt-container">
+    <!-- Company Information -->
+    <div class="company-info">
+      <h1>Bharat Bijli Ltd.</h1>
+      <p>123 Power Avenue, Energy District, Mumbai, India</p>
+      <p>Email: support&#64;bharatbijli.com | Phone: +91 9876543210</p>
+      <hr />
+    </div>
+  
+    <!-- Customer Information -->
+    <div class="customer-info">
+      <h2>Customer Details</h2>
+      <p><strong>Name:</strong> {{ paymentReceiptData.customerName }}</p>
+      <p><strong>Email:</strong> {{ paymentReceiptData.customerEmail }}</p>
+      <hr />
+    </div>
+  
+    <!-- Payment Receipt Section -->
+    <div *ngIf="paymentReceiptData" id="payment-receipt" class="payment-receipt">
+      <h2>Payment Receipt</h2>
+      <div class="receipt-details">
+        <div class="left-section">
+          <p><strong>Transaction ID:</strong> {{ paymentReceiptData.transactionId }}</p>
+          <p><strong>Payment Type:</strong> {{ paymentReceiptData.paymentType }}</p>
+          <p><strong>Payment Date:</strong> {{ paymentReceiptData.paymentDate }}</p>
+        </div>
+        <div class="right-section">
+          <p><strong>Bill Name:</strong> {{ paymentReceiptData.billName }}</p>
+          <p><strong>Bill Month:</strong> {{ paymentReceiptData.billMonth }}</p>
+          <p><strong>Due Date:</strong> {{ paymentReceiptData.billDueDate }}</p>
+        </div>
+      </div>
+      <div class="amount-section">
+        <p><strong>Bill Amount:</strong> ₹{{ paymentReceiptData.billAmount }}</p>
+        <p><strong>Discount Applied:</strong> ₹{{ paymentReceiptData.discountAmount }}</p>
+        <p><strong>Amount Paid:</strong> ₹{{ paymentReceiptData.amountPaid }}</p>
+      </div>
+      <hr />
+    </div>
+  
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+      <button class="back-btn" (click)="goBack()">
+        <i class="fas fa-arrow-left"></i> Back
+      </button>
+      <button class="email-btn" (click)="sendEmail()">
+        <i class="fas fa-envelope"></i> Send Receipt on Email
+      </button>
+      <button class="download-btn" (click)="generatePDF()">
+        <i class="fas fa-file-pdf"></i> Download as PDF
+      </button>
+    </div>
+  </div>
+  
