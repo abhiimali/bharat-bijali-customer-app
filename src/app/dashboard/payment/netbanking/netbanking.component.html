@@ -1,47 +1,44 @@
 <div class="netbanking-container">
   <h2>Select Net Banking</h2>
-  
-  <!-- Bank Selection -->
-  <div *ngIf="!showOtpInput && !showSuccess">
-    <label for="bank">Select Bank:</label>
-    <select id="bank" [(ngModel)]="selectedBank">
-      <option *ngFor="let bank of banks" [value]="bank">{{ bank }}</option>
-    </select>
+
+  <div *ngIf="!selectedBank && !showOtpInput && !showSuccess">
+    <div class="bank-grid">
+      <div class="bank-logo" *ngFor="let bank of banks" (click)="selectBank(bank.name)">
+        <img [src]="bank.logo" alt="{{ bank.name }}">
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="selectedBank && !showOtpInput && !showSuccess">
+    <h3>{{ selectedBank }}</h3>
 
     <div class="credentials">
-      <label for="username">Net Banking Username:</label>
-      <input type="text" id="netBankingUserName" [(ngModel)]="netBankingUserName" placeholder="Enter Username">
+      <label for="netBankingUserName">Username</label>
+      <input type="text" id="netBankingUserName" [(ngModel)]="netBankingUserName" placeholder="Enter Username"  maxlength="32">
 
-      <label for="password">Password:</label>
-      <input type="password" id="password" [(ngModel)]="password" placeholder="Enter Password">
+      <label for="password">Password</label>
+      <input type="password" id="password" [(ngModel)]="password" placeholder="Enter Password"  maxlength="32">
     </div>
 
-    <!-- Error message -->
     <div *ngIf="showError" class="error">{{ showError }}</div>
-
     <button (click)="continue()" class="btn">Continue</button>
   </div>
 
-  <!-- OTP Input -->
   <div *ngIf="showOtpInput && !showSuccess">
-    <label for="otp">Enter OTP:</label>
-    <input type="text" id="otp" [(ngModel)]="otp" placeholder="Enter 6-digit OTP">
-    
+    <h3>OTP Verification</h3>
+    <input type="text" class="otp-input" [(ngModel)]="otp" placeholder="Enter 6-digit OTP">
+    <button (click)="pay()" class="btn">Pay Now</button>
     <div *ngIf="showError" class="error">{{ showError }}</div>
-    
-    <button (click)="pay()" class="btn">Pay</button>
   </div>
 
-  <!-- Loading spinner -->
   <div *ngIf="isLoading" class="loading">
-    <div class="circle"></div>
-    <div class="rs-icon">₹</div>
+    <div class="loader-circle">
+      <span class="loader-icon">₹</span>
+    </div>
+    <div class="payment-text">Processing...</div>
   </div>
 
-  <!-- Success Message -->
-  <div *ngIf="showSuccess" class="success-message">
-    <h2>Payment Successful!</h2>
-    <p>{{ paymentStatus }}</p>
-    <p>Redirecting you to the bills page...</p>
+  <div *ngIf="showSuccess" class="success-message celebration">
+    Payment Successful! Transaction ID: {{ transactionId }} <br> Amount Paid: {{ amount }}
   </div>
 </div>

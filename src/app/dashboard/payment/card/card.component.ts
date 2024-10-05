@@ -27,7 +27,7 @@ export class CardComponent implements OnInit {
   cvvError: string | null = null;
 
   paymentStatusClass: string = '';
-
+  isProcessing: boolean = false;
   constructor(private paymentService: PaymentService, private router: Router) {}
 
   ngOnInit(): void {}
@@ -83,8 +83,11 @@ export class CardComponent implements OnInit {
         expiryDate: this.expiryDate
       };
 
+      this.isProcessing = true;
+
       this.paymentService.makeCardPayment(payload).subscribe({
         next: (response: any) => {
+          this.isProcessing = false; 
           if (response.statusCode === 200) {
             this.transactionId = response.data;
             this.showOtpInput = true;
@@ -96,6 +99,7 @@ export class CardComponent implements OnInit {
           }
         },
         error: () => {
+          this.isProcessing = false;
           this.paymentStatus = 'An error occurred. Please try again.';
           this.paymentStatusClass = 'error-message'; // Use error class for styling
         }
@@ -109,8 +113,10 @@ export class CardComponent implements OnInit {
       otp: this.otp
     };
 
+    this.isProcessing = true;
     this.paymentService.verifyCardPayment(payload).subscribe({
       next: (response: any) => {
+        this.isProcessing = false; 
         if (response.statusCode === 200) {
           this.paymentStatus = `Payment Successful! Amount: ₹${response.data.amount}, Transaction ID: ${response.data.transactionId}`;
           this.paymentStatusClass = 'success-message'; // Add success class
@@ -123,6 +129,7 @@ export class CardComponent implements OnInit {
         }
       },
       error: () => {
+        this.isProcessing = false; 
         this.paymentStatus = 'An error occurred. Please try again.';
         this.paymentStatusClass = 'error-message';
       }

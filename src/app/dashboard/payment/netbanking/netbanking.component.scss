@@ -1,12 +1,33 @@
 .netbanking-container {
   width: 100%;
-  max-width: 400px;
+  max-width: 500px;
   margin: 0 auto;
   text-align: center;
-  font-family: Arial, sans-serif;
 
   h2 {
     margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+  }
+
+  .bank-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+
+  .bank-logo {
+    cursor: pointer;
+    padding: 10px;
+    border: 2px solid transparent;
+    transition: border-color 0.3s ease;
+    &:hover, &.selected {
+      border-color: #007bff;
+    }
+    img {
+      width: 100%;
+    }
   }
 
   .credentials, select, input, .btn {
@@ -19,6 +40,31 @@
     border-radius: 5px;
   }
 
+  .credentials {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto; 
+  
+    label {
+      text-align: left;
+      margin-bottom: 5px;
+      font-size: 14px;
+    }
+  
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+  }
+
+  
   .btn {
     background-color: #007bff;
     color: white;
@@ -30,47 +76,117 @@
     background-color: #0056b3;
   }
 
-  .error {
-    color: red;
-    margin: 10px 0;
-  }
-
-  .loading {
+  .otp-input {
     margin-top: 20px;
+  }
+  .loading {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     position: relative;
+    margin-top: 20px;
   }
-
-  .circle {
-    width: 40px;
-    height: 40px;
-    border: 5px solid lightgray;
+  
+  .loader-circle {
+    width: 70px;
+    height: 70px;
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #4caf50; /* Green color for payment theme */
     border-radius: 50%;
-    border-top: 5px solid #007bff;
     animation: spin 1s linear infinite;
+    position: relative;
   }
-
-  .rs-icon {
+  
+  .loader-icon {
     position: absolute;
-    font-size: 20px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: #007bff;
+    font-size: 30px;
+    color: #4caf50;
   }
-
+  
+  /* New text under loader for user clarity */
+  .payment-text {
+    margin-top: 15px;
+    font-size: 18px;
+    color: #4caf50;
+    text-align: center;
+    font-weight: bold;
+  }
+  
   @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  
+
+  .error {
+    color: #dc3545;
+    background-color: #f8d7da; 
+    border: 1px solid #f5c6cb;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    margin-top: 15px;
+    text-align: left;
+    width: 100%;
+    box-sizing: border-box;
   }
 
-  .success-message {
-    background-color: #d4edda;
-    color: #155724;
-    padding: 20px;
-    border: 1px solid #c3e6cb;
-    border-radius: 5px;
+ .success-message {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 20px;
+  border: 1px solid #c3e6cb;
+  border-radius: 10px;
+  font-size: 18px;
+  animation: zoomIn 0.8s ease forwards, celebration 2s 0.8s ease forwards; /* Added animation */
+}
+
+@keyframes zoomIn {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
   }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes celebration {
+  0% {
+    background-color: #d4edda;
+  }
+  50% {
+    background-color: #c8e6c9; /* Light green for celebration feel */
+  }
+  100% {
+    background-color: #d4edda;
+  }
+}
+
+/* Optional confetti for celebration */
+@keyframes confetti {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(100vh); }
+}
+
+.confetti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: gold;
+  top: 0;
+  left: 50%;
+  animation: confetti 2s infinite;
+}
+
 }

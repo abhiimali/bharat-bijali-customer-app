@@ -45,9 +45,12 @@
             <p><strong>Amount:</strong> {{ bill.amount | currency:'INR':'symbol' }}</p>
           </div>
           <div class="bill-section offer-section">
-            <p class="offer-text">💡 Special Offer: Pay Before Due & Save 5%, Pay Online & Save 5%!</p>
-            <p><strong>Total Discount:</strong> {{ calculateTotalDiscount(bill.amount) | currency:'INR':'symbol' }}</p>
-            <p><strong>Final Amount:</strong> {{ calculateFinalAmount(bill.amount) | currency:'INR':'symbol' }}</p>
+            <p class="offer-text">💡 Special Offer: Pay Online & Save 5%!</p>
+            <div *ngIf="isEarlyPaymentEligible(bill.dueDate)">
+              <p><strong>Early Payment Discount:</strong> 5% off if paid before the due date!</p>
+            </div>
+            <p><strong>Total Discount:</strong> {{ calculateTotalDiscount(bill.amount, bill.dueDate) | currency:'INR':'symbol' }}</p>
+            <p><strong>Final Amount:</strong> {{ calculateFinalAmount(bill.amount, bill.dueDate) | currency:'INR':'symbol' }}</p>
           </div>
           <div class="bill-section due-date-section">
             <p><strong>Due Date:</strong> {{ bill.dueDate }}</p>
@@ -56,10 +59,9 @@
             <button (click)="openPaymentOptions(bill.billId)" class="pay-now-button">
               <i class="fa fa-credit-card"></i> Pay Now
             </button>
-            <button (click)="viewInvoice(bill.billId)" class="view-invoice-button">
+            <button [routerLink]="['/dashboard/invoice', bill.billId]">
               <i class="fa fa-file-invoice"></i> View Invoice
             </button>
-            <button [routerLink]="['/dashboard/invoice', bill.billId]">Generate Invoice</button>
           </div>
         </div>
       </div>

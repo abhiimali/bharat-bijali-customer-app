@@ -57,22 +57,18 @@
     <button (click)="pay()">Pay</button>
   </div>
 
-  <div *ngIf="paymentStatus" [ngClass]="paymentStatusClass">
-    <span *ngIf="paymentStatusClass === 'error-message'" class="error-icon">✖️</span>
-    {{ paymentStatus }}
-</div>
-
-<div *ngIf="paymentStatus" [ngClass]="paymentStatusClass">
-  <span *ngIf="paymentStatusClass === 'success-message'" class="tick-icon">✔️</span>
-  {{ paymentStatus }}
-</div>
-
-  <!-- <div *ngIf="paymentStatus" [ngClass]="paymentStatusClass">{{ paymentStatus }}</div> -->
-
-  <!-- <div *ngIf="paymentStatus" class="payment-status">
-    <div class="success-message">
-      <div class="tick-icon"></div>
-      <div class="message-content">{{ paymentStatus }}</div>
+  <!-- Loader Animation -->
+  <div *ngIf="isProcessing" class="loading">
+    <div class="loader-circle">
+      <span class="loader-icon">₹</span> <!-- Using INR symbol -->
     </div>
-  </div> -->
+    <div class="payment-text">Processing Payment...</div>
+  </div>
+
+  <!-- Payment Status Animation -->
+  <div *ngIf="paymentStatus" [ngClass]="paymentStatusClass" class="payment-status">
+    <span *ngIf="paymentStatusClass === 'error-message'" class="error-icon">✖️</span>
+    <span *ngIf="paymentStatusClass === 'success-message'" class="tick-icon">✔️</span>
+    {{ paymentStatus }}
+  </div>
 </div>

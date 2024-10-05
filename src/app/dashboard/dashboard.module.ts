@@ -34,6 +34,10 @@ import { MatNativeDateModule } from '@angular/material/core';
 
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDatepickerToggle } from '@angular/material/datepicker';
+import { CashComponent } from './payment/cash/cash.component';
+
+import { ReactiveFormsModule } from '@angular/forms'; // Import ReactiveFormsModule
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -49,7 +53,8 @@ import { MatDatepickerToggle } from '@angular/material/datepicker';
     PaymentSuccessComponent,
     InvoiceComponent,
     PaymentReceiptComponent,
-    TransactionComponent
+    TransactionComponent,
+    CashComponent
   ],
   imports: [
     CommonModule,
@@ -68,7 +73,8 @@ import { MatDatepickerToggle } from '@angular/material/datepicker';
     MatInputModule,
     MatSelectModule,
     MatNativeDateModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    ReactiveFormsModule
   ]
 })
 export class DashboardModule { }

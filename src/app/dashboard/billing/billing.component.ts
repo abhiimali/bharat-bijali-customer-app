@@ -77,17 +77,24 @@ export class BillingComponent implements OnInit {
     this.customerId = null; // Reset customer ID
     this.billId = null; // Reset bill ID
   }
-
-  calculateTotalDiscount(amount: number): number {
-    const discount = 0.05; // 5% for each offer
-    const totalDiscount = amount * discount * 2; // Applying both discounts
+  calculateTotalDiscount(amount: number, dueDate: string): number {
+    const earlyPaymentDiscount = 0.05; // 5% for early payment
+    const onlinePaymentDiscount = 0.05; // 5% for online payment
+    let totalDiscount = 0;
+  
+    if (this.isEarlyPaymentEligible(dueDate)) {
+      totalDiscount += amount * earlyPaymentDiscount; // Apply early payment discount
+    }
+  
+    totalDiscount += amount * onlinePaymentDiscount; // Apply online payment discount
+  
     return totalDiscount;
   }
   
-  calculateFinalAmount(amount: number): number {
-    const totalDiscount = this.calculateTotalDiscount(amount);
-    return amount - totalDiscount;
-  }
+  calculateFinalAmount(amount: number, dueDate: string): number {
+    const totalDiscount = this.calculateTotalDiscount(amount, dueDate); // Pass dueDate to calculateTotalDiscount
+    return amount - totalDiscount; // Subtract total discount from the original amount
+}
   
   viewInvoice(billId: number): void {
     // Placeholder for invoice viewing logic, implement later with API call
@@ -129,6 +136,14 @@ export class BillingComponent implements OnInit {
 
     return totalUnitConsumed > 0 ? totalUnitConsumed : 0;
   }
+
+  isEarlyPaymentEligible(dueDate: string): boolean {
+    const currentDate = new Date();
+    const due = new Date(dueDate);
+
+    return currentDate < due;
+  }
+
 
   payBill(bill: Bill) {
     console.log(`Paying bill: ${bill.billId}`);

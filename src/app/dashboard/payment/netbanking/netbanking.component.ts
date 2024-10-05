@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { PaymentService } from '../payment.service';
 
 @Component({
   selector: 'app-netbanking',
@@ -8,10 +8,8 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./netbanking.component.scss']
 })
 export class NetbankingComponent implements OnInit {
-  @Input() billId!: number; // Parent should pass the billId
-  @Input() customerId!: number;
-  @Input() amount!: number;
-
+  @Input() billId!: number; 
+ amount! : number
   selectedBank: string = '';
   netBankingUserName: string = '';
   password: string = '';
@@ -23,13 +21,21 @@ export class NetbankingComponent implements OnInit {
   showSuccess: boolean = false;
   showError: string | null = null;
 
-  banks: string[] = ['Bank A', 'Bank B', 'Bank C', 'Bank D']; // Dummy banks
+  banks = [
+    { name: 'Bank A', logo: 'assets/bank-logo.png' },
+    { name: 'Bank B', logo: 'assets/bank-logo.png' },
+    { name: 'Bank C', logo: 'assets/bank-logo.png' },
+    { name: 'Bank D', logo: 'assets/bank-logo.png' },
+  ];
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private paymentService: PaymentService,
+    private router: Router
+  ) {}
 
-  // Validate the username and password before proceeding
-  validateCredentials() {
-    return this.netBankingUserName.trim() !== '' && this.password.trim() !== '';
+  selectBank(bank: string) {
+    this.selectedBank = bank;
+    this.showOtpInput = false;
   }
 
   continue() {
@@ -38,34 +44,30 @@ export class NetbankingComponent implements OnInit {
       return;
     }
 
-    // Clear error and start animation
-    this.showError = null;
     this.isLoading = true;
+    this.showError = null;
 
-    // Make the API request to initiate the payment
     const requestData = {
-      customerId: this.customerId,
       billId: this.billId,
-      amount: this.amount,
       paymentType: 'NET_BANKING',
       netBankingUserName: this.netBankingUserName,
       password: this.password
     };
 
-    this.http.post('http://localhost:8080/api/payment/pay', requestData).subscribe(
+    this.paymentService.initiateNetBankingPayment(requestData).subscribe(
       (response: any) => {
         this.isLoading = false;
         if (response.statusCode === 200) {
-          // Move to the OTP step and save transactionId
           this.transactionId = response.data.transactionId;
           this.showOtpInput = true;
         } else {
-          this.showError = response.message; // Show error if the API fails
+          this.showError = response.message;
         }
       },
       (error) => {
+        console.log("Error ", error);
         this.isLoading = false;
-        this.showError = "An error occurred. Please try again.";
+        this.showError = error.error.message;
       }
     );
   }
@@ -76,25 +78,24 @@ export class NetbankingComponent implements OnInit {
       return;
     }
 
-    // Clear error and start animation
-    this.showError = null;
     this.isLoading = true;
+    this.showError = null;
 
     const verifyRequestData = {
       transactionId: this.transactionId,
       otp: this.otp
     };
 
-    // Call the API to verify OTP and confirm the payment
-    this.http.post('http://localhost:8080/api/payment/confirm-pay', verifyRequestData).subscribe(
+    this.paymentService.confirmNetBankingPayment(verifyRequestData).subscribe(
       (response: any) => {
         this.isLoading = false;
         if (response.statusCode === 200) {
+          this.amount = response.data.amount;
           this.paymentStatus = 'Payment Successful!';
           this.showSuccess = true;
           setTimeout(() => {
             this.router.navigate(['/dashboard/bills']);
-          }, 3000); // Redirect to the bills page after 3 seconds
+          }, 5000);
         } else {
           this.showError = response.message;
         }
@@ -104,6 +105,10 @@ export class NetbankingComponent implements OnInit {
         this.showError = "An error occurred. Please try again.";
       }
     );
+  }
+
+  validateCredentials() {
+    return this.netBankingUserName.trim() !== '' && this.password.trim() !== '';
   }
 
   ngOnInit(): void {}

@@ -1,6 +1,12 @@
 <div class="payment-container">
   <h2 class="payment-header">Bharat Bijali Payment Gateway</h2>
   <div class="payment-options">
+
+    <button (click)="selectPaymentOption('CASH')" 
+            [class.selected]="selectedPaymentOption === 'CASH'" 
+            class="payment-button">
+      <i class="fa fa-money-bill" aria-hidden="true"></i> CASH
+    </button>
     <button (click)="selectPaymentOption('UPI')" 
             [class.selected]="selectedPaymentOption === 'UPI'" 
             class="payment-button">
@@ -18,6 +24,9 @@
     </button>
   </div>
 
+  <div *ngIf="selectedPaymentOption === 'CASH'">
+    <app-cash  [billId]="billId"></app-cash>
+  </div>
   <div *ngIf="selectedPaymentOption === 'UPI'">
     <app-upi  [billId]="billId" ></app-upi>
   </div>

@@ -1,0 +1,28 @@
+<div class="cash-payment-container">
+  <h3>Cash Payment Request</h3>
+
+  <ng-container *ngIf="isRequestPending; else requestForm">
+    <div class="status-message">
+      <p class="success">{{ successMessage }}</p>
+      <p *ngIf="employeeName" class="info">Assigned Employee: {{ employeeName }}</p>
+      <p *ngIf="appointmentDate">Appointment Date: {{ appointmentDate }}</p>
+      <p *ngIf="expandedTimeSlot">Time Slot: {{ expandedTimeSlot }}</p>
+    </div>
+  </ng-container>
+
+  <ng-template #requestForm>
+    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+    <form [formGroup]="cashRequestForm" (ngSubmit)="requestCashPayment()">
+      <label for="appointmentDate">Select Appointment Date:</label>
+      <input type="date" formControlName="appointmentDate" id="appointmentDate" required>
+      
+      <label for="timeSlot">Select Time Slot:</label>
+      <select formControlName="timeSlot" id="timeSlot" required>
+        <option value="" disabled>Select a time slot</option>
+        <option *ngFor="let slot of timeSlots" [value]="slot.split(' ')[0]">{{ slot }}</option>
+      </select>
+      
+      <button type="submit" [disabled]="cashRequestForm.invalid">Submit Request</button>
+    </form>
+  </ng-template>
+</div>

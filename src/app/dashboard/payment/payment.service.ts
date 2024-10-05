@@ -22,5 +22,13 @@ export class PaymentService {
     return this.http.post(`${this.apiUrl}/verify-card-payment`, payload);
   }
 
+  initiateNetBankingPayment(data: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/pay`, data);
+  }
+
+  confirmNetBankingPayment(data: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/confirm-pay`, data);
+  }
+
 
 }
