@@ -22,10 +22,10 @@ export class NetbankingComponent implements OnInit {
   showError: string | null = null;
 
   banks = [
-    { name: 'Bank A', logo: 'assets/bank-logo.png' },
-    { name: 'Bank B', logo: 'assets/bank-logo.png' },
-    { name: 'Bank C', logo: 'assets/bank-logo.png' },
-    { name: 'Bank D', logo: 'assets/bank-logo.png' },
+    { name: 'State Bank Of India', logo: 'assets/sbin.jpg' },
+    { name: 'Axis Bank', logo: 'assets/axis.jpg' },
+    { name: 'HDFC Bank', logo: 'assets/hdfc.jpg' },
+    { name: 'ICICI Bank', logo: 'assets/icici.jpg' },
   ];
 
   constructor(

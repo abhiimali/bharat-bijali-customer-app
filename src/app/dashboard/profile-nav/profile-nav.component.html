@@ -1,0 +1,22 @@
+<nav class="navbar">
+    <div class="navbar-brand">
+      <!-- <img src="assets/logo.png" alt="Bharat Bijili Logo" class="logo" /> -->
+      <span class="brand-name">Bharat Bijili</span>
+      <span class="slogan">Empowering Your Energy Needs</span>
+    </div>
+    <div class="navbar-icons">
+      <div class="notification-icon" (click)="showNotifications()">
+        <img src="assets/notification-icon.png" alt="Notifications" />
+      </div>
+      <div class="profile-icon" (click)="toggleProfileDetails()">
+        <img src="assets/profile-icon.png" alt="Profile" />
+        <div *ngIf="showProfile" class="profile-details">
+          <p><strong>{{ customerName }}</strong></p>
+          <p>Email: {{ email }}</p>
+          <p>Phone: {{ phoneNumber }}</p>
+          <p>Address: {{ address }}</p>
+        </div>
+      </div>
+    </div>
+  </nav>
+  

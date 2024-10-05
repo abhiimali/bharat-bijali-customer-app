@@ -1,8 +1,8 @@
 <nav class="navbar">
   <div class="left-section">
-    <div class="logo">
+    <a href="#" class="logo">
       <img src="assets/logo.jpg" alt="Bharat Bijili Corporation Logo" />
-    </div>
+    </a>
     <div class="brand">
       <h1 class="brand-title">Bharat Bijili</h1>
       <p class="brand-slogan">Brightening lives, one home at a time.</p>
@@ -10,20 +10,18 @@
   </div>
 
   <div class="right-section">
-    <!-- Show this when user is not authenticated -->
     <ng-container *ngIf="!isAuthenticated; else authenticatedIcons">
-      <button mat-raised-button color="primary" class="login-btn" (click)="navigateToLogin()">
+      <button mat-raised-button class="login-btn" (click)="navigateToLogin()">
         Customer Login
       </button>
     </ng-container>
 
-    <!-- Show these icons when user is authenticated -->
     <ng-template #authenticatedIcons>
-      <button mat-icon-button>
-        <mat-icon color="primary" >notifications</mat-icon>
+      <button mat-icon-button aria-label="Notifications">
+        <mat-icon>notifications</mat-icon>
       </button>
-      <button mat-icon-button>
-        <mat-icon color="primary" >account_circle</mat-icon>
+      <button mat-icon-button aria-label="Account">
+        <mat-icon>account_circle</mat-icon>
       </button>
     </ng-template>
   </div>

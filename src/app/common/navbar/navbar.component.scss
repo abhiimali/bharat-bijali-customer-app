@@ -2,78 +2,123 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #ffffff;
-  padding: 5px 20px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
+  background-color: #ffffff; // White background for a clean look
+  padding: 10px 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  width: 100%;
+  z-index: 10;
+  top: 0;
 
-.left-section {
-  display: flex;
-  align-items: center;
-}
+  .left-section {
+    display: flex;
+    align-items: center;
 
-.logo img {
-  height: 60px;
-  margin-left: 40px;
-}
+    .logo img {
+      height: 50px;
+      margin-right: 10px;
+    }
 
-.brand {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start; // Align to the left of the logo
-  margin-left: 15px; // Space between logo and text
-}
+    .brand {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
 
-.brand-title {
-  font-family: 'Poppins', sans-serif;
-  font-size: 24px; // Adjust as necessary
-  color: #333; // Black or a deep color
-  margin: 0;
-}
+      .brand-title {
+        font-family: 'Poppins', sans-serif;
+        font-size: 22px;
+        color: #333; // Dark grey for the brand title
+        margin: 0;
+        white-space: nowrap;
+      }
 
-.brand-slogan {
-  font-family: 'Roboto Slab', serif;
-  font-size: 16px; // Adjust as necessary
-  color: #a88f3b; // Black-golden color
-  font-style: italic;
-  margin: 0;
-}
+      .brand-slogan {
+        font-family: 'Roboto Slab', serif;
+        font-size: 14px;
+        color: #888; // Lighter grey for the slogan
+        font-style: italic;
+        margin: 0;
+        white-space: nowrap;
+      }
+    }
+  }
 
-.right-section {
-  display: flex;
-  align-items: center;
-}
+  .right-section {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; // Ensure icons stay at the end of the section
 
-.login-btn {
-  background-color: #28a745; // Green color for the login button
-  color: white;
+    .login-btn {
+      background-color: #f8f9fa; // Light grey background for the button
+      color: #333; // Dark text for better readability
+      border: 1px solid #ccc; // Subtle border for definition
+      border-radius: 5px;
+      padding: 8px 16px;
+      font-weight: 600;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+      margin-right: 15px; // Add margin to space from icons
 
-  &:hover {
-    background-color: #218838; // Darker green on hover
+      &:hover {
+        background-color: #e2e6ea; // Slightly darker grey on hover
+        border-color: #aaa; // Darker border on hover
+      }
+    }
+
+    mat-icon-button {
+      color: #333; // Dark color for icons
+      margin-left: 15px;
+
+      mat-icon {
+        font-size: 28px;
+      }
+
+      &:hover {
+        opacity: 0.7;
+      }
+    }
   }
 }
 
-.right-section {
-  display: flex;
-  align-items: center;
-}
+// Mobile responsiveness
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    padding: 10px;
 
-.login-btn {
-  background-color: #28a745;
-  color: white;
+    .left-section {
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
 
-  &:hover {
-    background-color: #218838;
+      .brand {
+        flex-grow: 1;
+        justify-content: center;
+        text-align: center;
+
+        .brand-title {
+          font-size: 20px;
+        }
+
+        .brand-slogan {
+          font-size: 12px;
+        }
+      }
+    }
+
+    .right-section {
+      margin-top: 10px;
+      justify-content: center; // Center icons and button in mobile view
+      width: 100%;
+
+      .login-btn {
+        width: auto; // Ensure the button has an appropriate size
+        text-align: center;
+        margin: 0 10px; // Add horizontal margin for spacing
+      }
+
+      mat-icon-button {
+        margin-right: 30px;
+      }
+    }
   }
-}
-
-mat-icon {
-  font-size: 30px;
-  margin: 0 20px;
-  // padding-left: 10px; // Added horizontal margin for spacing
-  color: blue; // Example colorful icon color; adjust as needed
-}
-
-mat-icon:hover {
-  opacity: 0.8; // Add hover effect to icons
 }

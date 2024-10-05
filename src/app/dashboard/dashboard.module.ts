@@ -38,6 +38,7 @@ import { CashComponent } from './payment/cash/cash.component';
 
 import { ReactiveFormsModule } from '@angular/forms'; // Import ReactiveFormsModule
 import { HttpClientModule } from '@angular/common/http';
+import { ProfileNavComponent } from './profile-nav/profile-nav.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { HttpClientModule } from '@angular/common/http';
     InvoiceComponent,
     PaymentReceiptComponent,
     TransactionComponent,
-    CashComponent
+    CashComponent,
+    ProfileNavComponent
   ],
   imports: [
     CommonModule,
