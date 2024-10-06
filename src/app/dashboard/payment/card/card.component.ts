@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { PaymentService } from '../payment.service';
+import { error } from 'console';
 
 @Component({
   selector: 'app-card',
@@ -98,9 +99,9 @@ export class CardComponent implements OnInit {
             this.paymentStatusClass = 'error-message'; // Use error class for styling
           }
         },
-        error: () => {
+        error: (error) => {
           this.isProcessing = false;
-          this.paymentStatus = 'An error occurred. Please try again.';
+          this.paymentStatus = error.error.message;
           this.paymentStatusClass = 'error-message'; // Use error class for styling
         }
       });
@@ -128,9 +129,10 @@ export class CardComponent implements OnInit {
           this.paymentStatusClass = 'error-message'; 
         }
       },
-      error: () => {
+      error: (error) => {
         this.isProcessing = false; 
-        this.paymentStatus = 'An error occurred. Please try again.';
+        this.paymentStatus = error.error.message;
+        ;
         this.paymentStatusClass = 'error-message';
       }
     });

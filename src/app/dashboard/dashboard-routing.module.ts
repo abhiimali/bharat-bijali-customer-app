@@ -15,6 +15,7 @@ const routes: Routes = [
     component: DashboardHomeComponent,
     canActivate: [AuthenticationGuard],
     children: [
+      { path: '', redirectTo: 'bills', pathMatch: 'full' },
       { path: 'profile', component: BillingComponent },
       { path: 'bills', component: BillingComponent },
       {path:'paidbills', component : PaidBillsComponent},
@@ -22,8 +23,6 @@ const routes: Routes = [
       { path: 'invoice/:billId', component: InvoiceComponent },
       { path: 'payment-receipt/:billId', component: PaymentReceiptComponent },
       {path : 'transactions' , component : TransactionComponent}
-
-
     ]
   }
 ];

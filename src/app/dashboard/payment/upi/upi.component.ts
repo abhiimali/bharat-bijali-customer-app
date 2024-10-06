@@ -79,7 +79,7 @@ export class UpiComponent implements OnInit {
         }
       },
       (error) => {
-        this.paymentStatus = error.message;
+        this.paymentStatus = error.error.message;
       }
     );
   }

@@ -8,21 +8,48 @@
       <p class="brand-slogan">Brightening lives, one home at a time.</p>
     </div>
   </div>
+  <!-- else authenticatedIcons -->
 
   <div class="right-section">
-    <ng-container *ngIf="!isAuthenticated; else authenticatedIcons">
+    <ng-container *ngIf="!isAuthenticated;"> 
       <button mat-raised-button class="login-btn" (click)="navigateToLogin()">
         Customer Login
       </button>
     </ng-container>
 
-    <ng-template #authenticatedIcons>
-      <button mat-icon-button aria-label="Notifications">
-        <mat-icon>notifications</mat-icon>
-      </button>
-      <button mat-icon-button aria-label="Account">
-        <mat-icon>account_circle</mat-icon>
-      </button>
-    </ng-template>
+    <!-- <ng-template #authenticatedIcons>
+      <div class="profile-menu">
+        <button 
+          mat-icon-button 
+          aria-label="Account" 
+          [matTooltip]="'ID: ' + customerId + '\nName: ' + customerName + '\nEmail: ' + email + '\nPhone: ' + phoneNumber + '\nAddress: ' + address" 
+          matTooltipClass="profile-tooltip"
+          matTooltipPosition="below"
+          matTooltipShowDelay="500" 
+        >
+          <mat-icon>account_circle</mat-icon>
+        </button>
+      </div>        
+    </ng-template> -->
+
+    <div class="right-section">
+      <div class="profile-container" (click)="toggleProfileDetails()">
+        <button mat-icon-button>
+          <mat-icon>account_circle</mat-icon>
+        </button>
+  
+        <!-- Profile Dropdown Component -->
+        <div class="profile-details" *ngIf="showProfile" [@slideInOut]>
+          <p><strong>ID:</strong> {{ customerId }}</p>
+          <p><strong>Name:</strong> {{ customerName }}</p>
+          <p><strong>Email:</strong> {{ email }}</p>
+          <p><strong>Phone:</strong> {{ phoneNumber }}</p>
+          <p><strong>Address:</strong> {{ address }}</p>
+          <button mat-button (click)="logout()">Log Out</button>
+        </div>
+      </div>
+    </div>
+    
+
   </div>
 </nav>

@@ -43,7 +43,7 @@ export class InvoiceComponent implements OnInit {
   }
 
   goBack(): void {
-    this.location.back(); // Navigate to the previous page
+    this.location.back(); 
   }
 
 

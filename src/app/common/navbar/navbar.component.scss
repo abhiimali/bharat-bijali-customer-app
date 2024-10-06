@@ -1,12 +1,137 @@
+// .navbar {
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   background-color: #ffffff; // White background for a clean look
+//   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+//   position: fixed;
+//   width: 100%;
+//   height: 64px;
+//   z-index: 10;
+//   top: 0;
+
+//   .left-section {
+//     display: flex;
+//     align-items: center;
+
+//     .logo img {
+//       height: 50px;
+//       margin-right: 10px;
+//     }
+
+//     .brand {
+//       display: flex;
+//       flex-direction: column;
+//       align-items: flex-start;
+
+//       .brand-title {
+//         font-family: 'Poppins', sans-serif;
+//         font-size: 22px;
+//         color: #333; // Dark grey for the brand title
+//         margin: 0;
+//         white-space: nowrap;
+//       }
+
+//       .brand-slogan {
+//         font-family: 'Roboto Slab', serif;
+//         font-size: 14px;
+//         color: #888; // Lighter grey for the slogan
+//         font-style: italic;
+//         margin: 0;
+//         white-space: nowrap;
+//       }
+//     }
+//   }
+
+//   .right-section {
+//     display: flex;
+//     align-items: center;
+//     justify-content: flex-end; // Ensure icons stay at the end of the section
+
+//     .login-btn {
+//       background-color: #3f51b5; // Light grey background for the button
+//       color: white; // Dark text for better readability
+//       border: 1px solid #ccc; // Subtle border for definition
+//       border-radius: 5px;
+//       font-weight: 600;
+//       transition: background-color 0.3s ease, border-color 0.3s ease;
+//       margin-right: 24px; // Add margin to space from icons
+
+//       &:hover {
+//         background-color: #e2e6ea; // Slightly darker grey on hover
+//         border-color: #aaa; // Darker border on hover
+//       }
+//     }
+
+//     mat-icon-button {
+//       color: #333; // Dark color for icons
+//       margin-left: 15px;
+
+//       mat-icon {
+//         font-size: 28px;
+//       }
+
+//       &:hover {
+//         opacity: 0.7;
+//       }
+//     }
+//   }
+// }
+
+// // Mobile responsiveness
+// @media (max-width: 768px) {
+//   .navbar {
+//     flex-direction: column;
+//     padding: 10px;
+
+//     .left-section {
+//       flex-direction: row;
+//       justify-content: space-between;
+//       width: 100%;
+
+//       .brand {
+//         flex-grow: 1;
+//         justify-content: center;
+//         text-align: center;
+
+//         .brand-title {
+//           font-size: 20px;
+//         }
+
+//         .brand-slogan {
+//           font-size: 12px;
+//         }
+//       }
+//     }
+
+//     .right-section {
+//       margin-top: 10px;
+//       justify-content: center; // Center icons and button in mobile view
+//       width: 100%;
+
+//       .login-btn {
+//         width: auto; // Ensure the button has an appropriate size
+//         text-align: center;
+//         margin: 0 10px; // Add horizontal margin for spacing
+//       }
+
+//       mat-icon-button {
+//         margin-right: 30px;
+//       }
+//     }
+//   }
+// }
+
+
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #ffffff; // White background for a clean look
-  padding: 10px 20px;
+  background-color: #ffffff;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   position: fixed;
   width: 100%;
+  height: 64px;
   z-index: 10;
   top: 0;
 
@@ -27,18 +152,16 @@
       .brand-title {
         font-family: 'Poppins', sans-serif;
         font-size: 22px;
-        color: #333; // Dark grey for the brand title
+        color: #333;
         margin: 0;
-        white-space: nowrap;
       }
 
       .brand-slogan {
         font-family: 'Roboto Slab', serif;
         font-size: 14px;
-        color: #888; // Lighter grey for the slogan
-        font-style: italic;
+        color: #888;
         margin: 0;
-        white-space: nowrap;
+        font-style: italic;
       }
     }
   }
@@ -46,79 +169,81 @@
   .right-section {
     display: flex;
     align-items: center;
-    justify-content: flex-end; // Ensure icons stay at the end of the section
 
-    .login-btn {
-      background-color: #f8f9fa; // Light grey background for the button
-      color: #333; // Dark text for better readability
-      border: 1px solid #ccc; // Subtle border for definition
-      border-radius: 5px;
-      padding: 8px 16px;
-      font-weight: 600;
-      transition: background-color 0.3s ease, border-color 0.3s ease;
-      margin-right: 15px; // Add margin to space from icons
+    .profile-container {
+      position: relative;
 
-      &:hover {
-        background-color: #e2e6ea; // Slightly darker grey on hover
-        border-color: #aaa; // Darker border on hover
-      }
-    }
-
-    mat-icon-button {
-      color: #333; // Dark color for icons
-      margin-left: 15px;
-
-      mat-icon {
-        font-size: 28px;
+      mat-icon-button {
+        color: #333;
+        mat-icon {
+          font-size: 28px;
+        }
+        &:hover {
+          opacity: 0.7;
+        }
       }
 
-      &:hover {
-        opacity: 0.7;
+      .profile-details {
+        position: absolute;
+        top: 64px; // Below the navbar
+        right: 0;
+        background-color: #fff;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        width: 250px;
+        padding: 20px;
+        z-index: 999;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        transition: all 0.3s ease;
+
+        p {
+          margin: 0 0 10px;
+          font-size: 14px;
+          color: #333;
+        }
+
+        button {
+          align-self: center;
+          background-color: #e53935;
+          color: #fff;
+          border-radius: 20px;
+          &:hover {
+            background-color: #d32f2f;
+          }
+        }
       }
     }
   }
 }
 
-// Mobile responsiveness
+// Animations for profile dropdown
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.profile-details {
+  animation: slideIn 0.3s ease-in-out;
+}
+
+// Media Queries
 @media (max-width: 768px) {
   .navbar {
     flex-direction: column;
-    padding: 10px;
 
     .left-section {
-      flex-direction: row;
-      justify-content: space-between;
-      width: 100%;
-
-      .brand {
-        flex-grow: 1;
-        justify-content: center;
-        text-align: center;
-
-        .brand-title {
-          font-size: 20px;
-        }
-
-        .brand-slogan {
-          font-size: 12px;
-        }
-      }
-    }
-
-    .right-section {
-      margin-top: 10px;
-      justify-content: center; // Center icons and button in mobile view
-      width: 100%;
-
-      .login-btn {
-        width: auto; // Ensure the button has an appropriate size
-        text-align: center;
-        margin: 0 10px; // Add horizontal margin for spacing
-      }
-
-      mat-icon-button {
-        margin-right: 30px;
+      .brand-title {
+        font-size: 18px;
       }
     }
   }
 }
+

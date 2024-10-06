@@ -1,69 +1,54 @@
-<div class="invoice-header">
-  <button class="back-button" (click)="goBack()">
-      &#8592; Back
-  </button>
-  <button class="download-button" (click)="generatePDF()">Download PDF</button>
-</div>
-
-<div class="invoice-container" id="invoice" *ngIf="invoiceData">
-  <div class="header">
-      <img src="assets/logo.png" alt="Bharat Bijli Logo" class="company-logo">
-      <h1>Bharat Bijli</h1>
-      <p class="slogan">"Powering a Brighter Future"</p>
-  </div>
-  
-  <div class="company-info">
-      <h2>{{ invoiceData.companyName }}</h2>
-      <p>GST Number: {{ invoiceData.gstNumber }}</p>
-      <p>{{ invoiceData.companyAddress }}</p>
-      <p>Invoice Date: {{ invoiceData.invoiceDate }}</p>
+<div class="invoice-container">
+  <!-- Back and Download Buttons -->
+  <div class="invoice-actions">
+    <button class="btn back-btn" (click)="goBack()">Back</button>
+    <button class="btn download-btn" (click)="generatePDF()">Download Invoice</button>
   </div>
 
-  <div class="customer-info">
-      <h3>Customer Information</h3>
-      <p><strong>Customer Name:</strong> {{ invoiceData.customerName }}</p>
-      <p><strong>Email:</strong> {{ invoiceData.email }}</p>
-      <p><strong>Phone:</strong> {{ invoiceData.phoneNumber }}</p>
-      <p><strong>Address:</strong> {{ invoiceData.address }}</p>
+  <!-- Invoice Section -->
+  <div id="invoice" class="invoice-card">
+    
+    <!-- Company Info -->
+    <div class="company-header">
+      <h1>{{invoiceData?.companyName}}</h1>
+      <p>GST Number: {{invoiceData?.gstNumber}}</p>
+      <p>{{invoiceData?.companyAddress}}</p>
+    </div>
+
+    <!-- Customer Info Section -->
+    <div class="section customer-section">
+      <h2>Customer Information</h2>
+      <div class="info-row">
+        <p><strong>Name:</strong> {{invoiceData?.customerName}}</p>
+        <p><strong>Email:</strong> {{invoiceData?.email}}</p>
+      </div>
+      <div class="info-row">
+        <p><strong>Phone:</strong> {{invoiceData?.phoneNumber}}</p>
+        <p><strong>Address:</strong> {{invoiceData?.address}}</p>
+      </div>
+    </div>
+
+    <!-- Invoice Info Section -->
+    <div class="section invoice-section">
+      <h2>Invoice Details</h2>
+      <div class="info-row">
+        <p><strong>Bill Name:</strong> {{invoiceData?.billName}}</p>
+        <p><strong>Description:</strong> {{invoiceData?.description}}</p>
+      </div>
+      <div class="info-row">
+        <p><strong>Invoice Date:</strong> {{invoiceData?.invoiceDate}}</p>
+        <p><strong>Bill ID:</strong> #{{invoiceData?.billId}}</p>
+      </div>
+      <div class="info-row">
+        <p><strong>Month/Year:</strong> {{invoiceData?.billMonth}} {{invoiceData?.billYear}}</p>
+        <p><strong>Due Date:</strong> {{invoiceData?.dueDate}}</p>
+      </div>
+    </div>
+
+    <!-- Amount Due Section -->
+    <div class="section amount-section">
+      <h2>Total Amount</h2>
+      <p class="total-amount">₹{{invoiceData?.amount}}</p>
+    </div>
   </div>
-
-  <table class="details">
-      <tr>
-          <th>Description</th>
-          <td>{{ invoiceData.description }}</td>
-      </tr>
-      <tr>
-          <th>Bill Name</th>
-          <td>{{ invoiceData.billName }}</td>
-      </tr>
-      <tr>
-          <th>Bill Month/Year</th>
-          <td>{{ invoiceData.billMonth }}/{{ invoiceData.billYear }}</td>
-      </tr>
-      <tr>
-          <th>Amount</th>
-          <td>&#8377;{{ invoiceData.amount }}</td>
-      </tr>
-      <tr>
-          <th>Discount Applied</th>
-          <td>{{ invoiceData.discountApplied ? invoiceData.discountApplied : 'N/A' }}</td>
-      </tr>
-      <tr>
-          <th>Final Amount</th>
-          <td>&#8377;{{ invoiceData.finalAmount }}</td>
-      </tr>
-      <tr>
-          <th>Due Date</th>
-          <td>{{ invoiceData.dueDate }}</td>
-      </tr>
-  </table>
-
-  <div class="summary">
-      <p><strong>Total Amount: &#8377;{{ invoiceData.finalAmount }}</strong></p>
-      <p><strong>Due Date: {{ invoiceData.dueDate }}</strong></p>
-  </div>
-</div>
-
-<div *ngIf="errorMessage" class="error-message">
-  <p>{{ errorMessage }}</p>
 </div>

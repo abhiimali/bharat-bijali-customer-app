@@ -24,16 +24,16 @@ export class CashComponent implements OnInit {
     'SLOT_4': '4:00 PM - 6:00 PM'
   };
 
-
   successMessage: string | null = null;
   errorMessage: string | null = null;
 
   // New properties for status handling
   isRequestPending: boolean = false;
+  isRequestApproved: boolean = false;
   appointmentDate: string | null = null;
   timeSlot: string | null = null;
   employeeName: string | null = null;
-expandedTimeSlot : string | null = null;
+  expandedTimeSlot: string | null = null;
 
   constructor(private http: HttpClient, private fb: FormBuilder) {
     this.cashRequestForm = this.fb.group({
@@ -51,22 +51,22 @@ expandedTimeSlot : string | null = null;
       .subscribe(
         (response: any) => {
           if (response.statusCode === 200) {
-            console.log("In 200 Block ")
             const { status, appointmentDate, timeSlot, employeeName } = response.data;
-            this.expandedTimeSlot = this.timeSlotMapping[this.timeSlot || ''] || this.timeSlot;
+
             this.isRequestPending = status === 'PENDING';
+            this.isRequestApproved = status === 'APPROVED';
             this.appointmentDate = appointmentDate;
             this.timeSlot = timeSlot;
-            this.employeeName = status === 'APPROVED' ? employeeName : null;
+            this.expandedTimeSlot = this.timeSlotMapping[timeSlot] || timeSlot;
+            this.employeeName = employeeName;
 
             if (this.isRequestPending) {
               this.successMessage = 'Your cash payment request is pending.';
-            } else {
+            } else if (this.isRequestApproved) {
               this.successMessage = `Cash payment request approved. Appointment Date: ${appointmentDate}, Time Slot: ${this.expandedTimeSlot}, Employee: ${employeeName}`;
             }
-          } else if (response.statusCode === 400) {
+          } else {
             this.errorMessage = 'No cash request found. Please book a slot.';
-            this.isRequestPending = false;
           }
         },
         (error) => {

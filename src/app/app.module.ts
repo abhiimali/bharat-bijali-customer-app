@@ -24,6 +24,7 @@ import { AuthInterceptorService } from './authentication/auth-interceptor.servic
 import { HttpClientModule } from '@angular/common/http';
 
 import { registerLocaleData } from '@angular/common';
+import { MatTooltip, MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { registerLocaleData } from '@angular/common';
     MatInputModule,
     MatSnackBarModule,
     MatListModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTooltipModule
     
   ],
   providers: [

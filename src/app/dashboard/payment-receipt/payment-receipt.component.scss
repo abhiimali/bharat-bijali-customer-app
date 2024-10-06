@@ -1,96 +1,132 @@
 .receipt-container {
-    max-width: 800px;
-    margin: 0 auto;
-    background-color: #f9f9f9;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  
-    h1, h2 {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  h1, h2 {
+    margin-bottom: 10px;
+    color: #333;
+  }
+
+  h1 {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  h2 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+    color: #444;
+  }
+
+  p {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #555;
+  }
+
+  .company-info {
+    text-align: center;
+    margin-bottom: 20px;
+
+    .company-logo {
+      width: 100px;
       margin-bottom: 10px;
-      color: #333;
     }
-  
-    h1 {
-      font-size: 24px;
-      font-weight: bold;
-      text-align: center;
-    }
-  
-    h2 {
-      font-size: 20px;
-      font-weight: bold;
-      margin-top: 20px;
-      color: #444;
-    }
-  
+
     p {
-      margin: 5px 0;
-      font-size: 16px;
-      color: #555;
+      font-size: 14px;
+      color: #777;
     }
-  
-    .company-info {
+  }
+
+  .customer-info {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .payment-receipt {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+
+    .payment-status {
       text-align: center;
       margin-bottom: 20px;
-  
-      p {
-        font-size: 14px;
-        color: #777;
+
+      .success-tick {
+        width: 50px;
+      }
+
+      h2 {
+        color: #4CAF50;
       }
     }
-  
-    .customer-info {
-      margin-bottom: 20px;
-      padding: 10px;
-      background-color: #fff;
-      border-radius: 5px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    }
-  
-    .payment-receipt {
-      background-color: #fff;
-      padding: 15px;
-      border-radius: 5px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  
-      .receipt-details {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 15px;
-  
-        .left-section, .right-section {
-          flex: 1;
-        }
-      }
-  
-      .amount-section {
-        text-align: right;
-        p {
-          font-size: 18px;
-          font-weight: bold;
-        }
-      }
-    }
-  
-    hr {
-      border: none;
-      border-top: 1px solid #ddd;
-      margin: 20px 0;
-    }
-  
-    .action-buttons {
+
+    .receipt-details {
       display: flex;
       justify-content: space-between;
-      margin-top: 20px;
-  
-      button {
-        padding: 10px 20px;
-        font-size: 16px;
-        border-radius: 5px;
-        display: flex;
-        align-items: center
+      margin-bottom: 15px;
+
+      .left-section, .right-section {
+        flex: 1;
       }
-      
     }
+
+    .amount-section {
+      text-align: right;
+      p {
+        font-size: 18px;
+        font-weight: bold;
+      }
+    }
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 20px 0;
+  }
+
+  .action-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+    }
+
+    .back-btn {
+      background-color: #f44336;
+      color: white;
+    }
+
+    .email-btn {
+      background-color: #2196F3;
+      color: white;
+    }
+
+    .download-btn {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    i {
+      margin-right: 8px;
+    }
+  }
 }
