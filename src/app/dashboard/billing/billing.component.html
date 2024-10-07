@@ -8,11 +8,11 @@
       </select>
       <select [(ngModel)]="selectedYear">
         <option value="">Year</option>
-        <option *ngFor="let year of [2024, 2023, 2022]">{{ year }}</option>
+        <option *ngFor="let year of [2025,2024, 2023, 2022]">{{ year }}</option>
       </select>
       <select [(ngModel)]="selectedBillType">
         <option value="">Bill Type</option>
-        <option *ngFor="let type of ['ELECTRICITY', 'WATER', 'INTERNET', 'RECONNECTION']">{{ type }}</option>
+        <option *ngFor="let type of ['PERSONAL', 'BUSINESS', 'LATE_PAYMENT', 'RECONNECTION' ,'DEPOSIT']">{{ type }}</option>
       </select>
     </div>
   
@@ -25,8 +25,8 @@
       </div>
       <div class="summary-box total-units">
         <i class="fa fa-tachometer-alt"></i>
-        <h4>Total Units Consumed</h4>
-        <p> {{ currentMonthUsage }}</p>
+        <h4>Total Units Consumed This Month</h4>
+        <p> {{ currentMonthUsage }} kWh</p>
       </div>
     </div>
   
@@ -38,8 +38,10 @@
       <div class="bill" *ngFor="let bill of pendingBills">
         <div class="bill-details-grid">
           <div class="bill-section bill-name">
+            <i><h4>Bill ID: {{ bill.billId }}</h4></i>
             <h4>{{ bill.billName }}</h4>
             <p>{{ bill.description }}</p>
+            <p><strong>Unit Consumed: </strong> {{ bill.unitConsumed}} kWh</p>
           </div>
           <div class="bill-section amount-section">
             <p><strong>Amount:</strong> {{ bill.amount | currency:'INR':'symbol' }}</p>

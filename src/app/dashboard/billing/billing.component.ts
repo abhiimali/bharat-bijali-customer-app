@@ -39,19 +39,18 @@ export class BillingComponent implements OnInit {
 
   isPaymentModalOpen = false;
   selectedPaymentMethod: string | null = null;
-  customerId: number | null = null; // To store selected customer ID
-  billId: number | null = null; // To store selected bill ID
+  customerId: number | null = null;
+  billId: number | null = null; 
 
   ngOnInit(): void {
     this.fetchBills();
   }
 
-  // Fetch bills from API on component initialization
   fetchBills(): void {
     this.http.get<Bill[]>('http://localhost:8080/api/customer/bills')
       .subscribe(
         (response: any) => {
-          this.bills = response.data; // Assuming data is returned inside "data" field
+          this.bills = response.data;
         },
         (error) => {
 
@@ -62,9 +61,9 @@ export class BillingComponent implements OnInit {
   }
 
   openPaymentModal(customerId: number, billId: number) {
-    this.customerId = customerId; // Set the customer ID
-    this.billId = billId; // Set the bill ID
-    this.isPaymentModalOpen = true; // Open the modal
+    this.customerId = customerId; 
+    this.billId = billId;
+    this.isPaymentModalOpen = true; 
   }
 
   openPaymentOptions(billId: number) {
@@ -74,39 +73,36 @@ export class BillingComponent implements OnInit {
   closePaymentModal() {
     this.isPaymentModalOpen = false;
     this.selectedPaymentMethod = null;
-    this.customerId = null; // Reset customer ID
-    this.billId = null; // Reset bill ID
+    this.customerId = null; 
+    this.billId = null; 
   }
   calculateTotalDiscount(amount: number, dueDate: string): number {
-    const earlyPaymentDiscount = 0.05; // 5% for early payment
-    const onlinePaymentDiscount = 0.05; // 5% for online payment
+    const earlyPaymentDiscount = 0.05; 
+    const onlinePaymentDiscount = 0.05; 
     let totalDiscount = 0;
   
     if (this.isEarlyPaymentEligible(dueDate)) {
-      totalDiscount += amount * earlyPaymentDiscount; // Apply early payment discount
+      totalDiscount += amount * earlyPaymentDiscount; 
     }
   
-    totalDiscount += amount * onlinePaymentDiscount; // Apply online payment discount
+    totalDiscount += amount * onlinePaymentDiscount; 
   
     return totalDiscount;
   }
   
   calculateFinalAmount(amount: number, dueDate: string): number {
-    const totalDiscount = this.calculateTotalDiscount(amount, dueDate); // Pass dueDate to calculateTotalDiscount
-    return amount - totalDiscount; // Subtract total discount from the original amount
+    const totalDiscount = this.calculateTotalDiscount(amount, dueDate);
+    return amount - totalDiscount; 
 }
   
   viewInvoice(billId: number): void {
-    // Placeholder for invoice viewing logic, implement later with API call
     console.log(`Viewing invoice for bill: ${billId}`);
   }
   
-  // Get pending bills
   get pendingBills() {
     return this.filterBills('PENDING');
   }
 
-  // Get paid bills
   get paidBills() {
     return this.filterBills('PAID');
   }
@@ -118,7 +114,11 @@ export class BillingComponent implements OnInit {
         (this.selectedMonth ? bill.billMonth === this.selectedMonth : true) &&
         (this.selectedYear ? bill.billYear.toString() === this.selectedYear : true) &&
         (this.selectedBillType ? bill.billType === this.selectedBillType : true) &&
-        (this.searchQuery ? bill.billName.toLowerCase().includes(this.searchQuery.toLowerCase()) : true)
+        (
+          this.searchQuery ? 
+          (bill.billName.toLowerCase().includes(this.searchQuery.toLowerCase()) || bill.billId.toString().includes(this.searchQuery)) 
+          : true
+        )
       );
   }
 

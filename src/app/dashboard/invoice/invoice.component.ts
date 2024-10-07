@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import { NotificationService } from 'src/app/common/notification/notification.service';
 
 @Component({
   selector: 'app-invoice',
@@ -15,7 +16,7 @@ export class InvoiceComponent implements OnInit {
   billId!: number;
   errorMessage: string | null = null;
   constructor(private invoiceService: InvoiceService, private route: ActivatedRoute,
-    private location: Location
+    private location: Location, private notificationService : NotificationService
   ) { }
 
   ngOnInit(): void {
@@ -31,13 +32,13 @@ export class InvoiceComponent implements OnInit {
       if (response.statusCode === 200) {
         this.invoiceData = response.data;
         console.log(this.invoiceData)
-        this.errorMessage = null; // Clear error if data is found
+        this.errorMessage = null;
       } else {
-        this.invoiceData = null; // Clear invoice data
-        this.errorMessage = response.message; // Set error message
+        this.invoiceData = null; 
+        this.notificationService.showError(response.message)
+        this.errorMessage = response.message;
       }
     }, error => {
-      // Optional: Handle network or other server-side errors here
       this.errorMessage = 'Something went wrong. Please try again later.';
     });
   }

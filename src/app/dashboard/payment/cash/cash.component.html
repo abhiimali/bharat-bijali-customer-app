@@ -1,39 +1,50 @@
 <div class="cash-payment-container">
-  <h3>Cash Payment Request</h3>
+  <h2>Cash Payment Request</h2>
 
-  <ng-container *ngIf="!isRequestApproved; else approvedContent">
-    <div *ngIf="isRequestPending; else requestForm">
-      <div class="status-message">
-        <p class="success">{{ successMessage }}</p>
-        <p *ngIf="employeeName" class="info">Assigned Employee: {{ employeeName }}</p>
-        <p *ngIf="appointmentDate">Appointment Date: {{ appointmentDate }}</p>
-        <p *ngIf="expandedTimeSlot">Time Slot: {{ expandedTimeSlot }}</p>
-      </div>
-    </div>
+  <!-- Display Success or Error Messages -->
+  <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
 
-    <ng-template #requestForm>
-      <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
-      <form [formGroup]="cashRequestForm" (ngSubmit)="requestCashPayment()">
-        <label for="appointmentDate">Select Appointment Date:</label>
-        <input type="date" formControlName="appointmentDate" id="appointmentDate" required>
-        
-        <label for="timeSlot">Select Time Slot:</label>
-        <select formControlName="timeSlot" id="timeSlot" required>
-          <option value="" disabled>Select a time slot</option>
-          <option *ngFor="let slot of timeSlots" [value]="slot.split(' ')[0]">{{ slot }}</option>
+  <!-- If there is no request, show the form to create one -->
+  <div *ngIf="!isRequestPending && !isRequestApproved && !isRequestCancelled && !isRequestFulfilled">
+    <form [formGroup]="cashRequestForm" (ngSubmit)="requestCashPayment()">
+      <label for="appointmentDate">Appointment Date:</label>
+      <input type="date" id="appointmentDate" formControlName="appointmentDate" required>
+
+      <label for="timeSlot">Select Time Slot:</label>
+      <select id="timeSlot" formControlName="timeSlot" required>
+        <option *ngFor="let slot of timeSlots" [value]="slot">{{ slot }}</option>
+      </select>
+
+      <button type="submit" [disabled]="cashRequestForm.invalid">Submit Request</button>
+    </form>
+  </div>
+
+  <!-- If there is a request, show details and options to cancel/reschedule -->
+  <div *ngIf="isRequestPending || isRequestApproved || isRequestCancelled" class="request-details">
+    <p *ngIf="appointmentDate">Appointment Date: {{ appointmentDate }}</p>
+    <p *ngIf="timeSlot">Time Slot: {{ expandedTimeSlot }}</p>
+
+    <!-- Cancel Button -->
+    <button *ngIf="canCancel && !isRequestCancelled" (click)="cancelCashPayment()">Cancel Request</button>
+
+    <!-- Reschedule Button -->
+    <button (click)="toggleRescheduleForm()">Reschedule Request</button>
+
+    <!-- Reschedule Form -->
+    <div *ngIf="showRescheduleForm" class="reschedule-form">
+      <h3>Reschedule Request</h3>
+      <form [formGroup]="cashRequestForm" (ngSubmit)="rescheduleCashPayment()">
+        <label for="rescheduleDate">Reschedule Date:</label>
+        <input type="date" id="rescheduleDate" formControlName="appointmentDate" required>
+
+        <label for="rescheduleTimeSlot">Select New Time Slot:</label>
+        <select id="rescheduleTimeSlot" formControlName="timeSlot" required>
+          <option *ngFor="let slot of timeSlots" [value]="slot">{{ slot }}</option>
         </select>
-        
-        <button type="submit" [disabled]="cashRequestForm.invalid">Submit Request</button>
-      </form>
-    </ng-template>
-  </ng-container>
 
-  <ng-template #approvedContent>
-    <div class="status-message">
-      <p class="success">{{ successMessage }}</p>
-      <p class="info">Assigned Employee: {{ employeeName }}</p>
-      <p>Appointment Date: {{ appointmentDate }}</p>
-      <p>Time Slot: {{ expandedTimeSlot }}</p>
+        <button type="submit" [disabled]="cashRequestForm.invalid">Submit Reschedule</button>
+      </form>
     </div>
-  </ng-template>
+  </div>
 </div>

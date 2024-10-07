@@ -72,6 +72,18 @@
   //   transform: scale(0.5);
   // }
   
+  .bill-name h4:first-child {
+    font-style: italic;
+    font-size: 1.2rem;
+    color: green; 
+    background-color: #e9f5ff;
+    padding: 8px 12px;
+    border-radius: 5px; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+    display: inline-block; 
+    margin-bottom: 28px; 
+  }
+
   .bill-details-grid {
     display: flex;
     flex-direction: column;
