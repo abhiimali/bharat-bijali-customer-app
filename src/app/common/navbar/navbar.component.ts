@@ -60,6 +60,10 @@ export class NavbarComponent {
     this.router.navigate(['/authentication']);
   }
 
+  goToDashboard() {
+    this.router.navigate(['/dashboard']);
+  }
+
   logout() {
     localStorage.removeItem('authToken');  // Remove authentication token
     this.isAuthenticated = false;
